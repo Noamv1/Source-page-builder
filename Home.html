@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>בונה דפי מקורות</title>
-<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600&family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600&family=Rubik:wght@400;600&family=Heebo:wght@400;700&family=Alef:wght@400;700&family=Frank+Ruhl+Libre:wght@400;700&family=David+Libre:wght@400;700&family=Miriam+Libre:wght@400;700&family=Noto+Serif+Hebrew:wght@400;700&family=Noto+Sans+Hebrew:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Rashi+Hebrew&family=Secular+One&family=Suez+One&family=Varela+Round&family=Bellefair&family=Amatic+SC:wght@400;700&family=Karantina&display=swap" rel="stylesheet">
 <style id="css">
 :root{color-scheme:light;--bg:#e8ecec;--pn:#fff;--tx:#1b2528;--mut:#5a6a6e;--bd:#cbd5d6;--ac:#1f6f68;--pg:#fff;--pgt:#111}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#0f1719;--pn:#172124;--tx:#e2ecec;--mut:#95a8ab;--bd:#2e3f43;--ac:#5cc4b8;--pg:#1b272b;--pgt:#e8efef}}
@@ -30,17 +31,17 @@ aside h3{font-size:13px;margin:14px 0 6px;color:var(--mut)}aside h3:first-child{
 #ol button:hover{background:var(--bg)}
 .fld{display:block;margin:7px 0;font-size:13px}.fld .in{width:100%;margin-top:2px}
 #stage{flex:1;overflow:auto;padding:18px 10px 90px}
-.page{width:210mm;max-width:100%;min-height:297mm;margin:0 auto;background:var(--pg);color:var(--pgt);padding:var(--m,20mm);font-family:var(--ff);font-size:calc(var(--fs,16)*1px);line-height:var(--lh,1.5);box-shadow:0 2px 14px #0003;overflow-wrap:anywhere}
-.blk{position:relative;margin:0 0 .7em;padding:.35em .6em;border:1px dashed transparent;border-radius:6px}
+.page{--phpx:1123px;position:relative;width:var(--pw,210mm);flex:none;min-height:var(--ph,297mm);margin:0 auto;background:var(--pg);color:var(--pgt);padding:var(--m,20mm);font-family:var(--ff);font-size:calc(var(--fs,16)*1px);line-height:var(--lh,1.5);box-shadow:0 2px 14px #0003;overflow-wrap:anywhere}
+.blk{position:relative;margin:0 0 var(--bs,.7em);padding:.35em .6em;border:1px dashed transparent;border-radius:6px}
 .blk:hover{border-color:var(--bd)}.blk.sel{border-color:var(--ac)}
 .bt{display:none;position:absolute;inset-block-start:-15px;inset-inline-end:6px;gap:2px;align-items:center;background:var(--pn);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:2px 3px;z-index:3;font:13px Assistant,Arial,sans-serif;box-shadow:0 2px 8px #0002;line-height:1.2}
 .blk:hover>.bt,.blk.sel>.bt,.blk:focus-within>.bt{display:flex}
 .bt button,.bt .dh{border:0;background:none;color:inherit;cursor:pointer;padding:3px 6px;border-radius:5px;font:inherit}.bt .dh{cursor:grab}.bt select{font:inherit;max-width:92px}
 .ed{min-height:1.4em;outline:none}.ed:empty::before{content:attr(data-ph);opacity:.4}
-.tags{display:none;width:100%;margin-top:4px;font-size:12px;border:1px dashed var(--bd);background:transparent;color:inherit;padding:2px 6px}.blk.sel .tags{display:block}
+.tags{display:none;width:100%;margin-top:4px;font-size:12px;border:1px dashed var(--bd);background:transparent;color:inherit;padding:2px 6px}.tags.tgon{display:block}
 .ttl1{text-align:center;margin:0 0 .6em}.ph,.pf{font-size:.8em;opacity:.7;text-align:center;margin-block:.5em}
-.t-heading .ed{font-size:1.7em;font-weight:700;text-align:center}
-.t-subheading .ed{font-size:1.25em;font-weight:700;color:var(--pac,#1f6f68)}
+.t-heading .ed{font-size:calc(1.7em*var(--hs,1));font-weight:700;text-align:center;font-family:var(--hf,inherit)}
+.t-subheading .ed{font-size:calc(1.25em*var(--hs,1));font-family:var(--hf,inherit);font-weight:700;color:var(--pac,#1f6f68)}
 .t-source{border-inline-start:4px solid var(--pac,#1f6f68);background:color-mix(in srgb,var(--pac,#1f6f68) 7%,transparent)}
 .sh{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font:600 .85em/1.2 Assistant,Rubik,sans-serif;margin-bottom:4px}
 .sh select,.sh .ref{border:0;background:transparent;color:inherit;font:inherit;padding:2px 0;min-width:0}
@@ -71,17 +72,59 @@ figure{margin:0 auto;text-align:center}img{max-width:100%;height:auto;border:1px
 .dr{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--bd);flex-wrap:wrap}.dr small{display:block;color:var(--mut)}
 #toast{position:fixed;inset-inline:0;bottom:18px;margin:auto;width:max-content;max-width:90%;background:#222;color:#fff;padding:8px 16px;border-radius:99px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:60}#toast.on{opacity:1}
 .tgl{display:none}body.fs aside{display:none}
-.page[data-cols="2"]{column-count:2;column-gap:10mm}.page[data-cols="2"] .blk{break-inside:avoid}.page[data-cols="2"] .t-heading,.page[data-cols="2"] .ttl1,.page[data-cols="2"] .ph,.page[data-cols="2"] .pf{column-span:all}
+.page.pg{background:repeating-linear-gradient(to bottom,var(--pg) 0,var(--pg) var(--phpx),transparent var(--phpx),transparent calc(var(--phpx) + 16px));box-shadow:none}
+.page.pg .ph,.page.pg .pf{display:none}
+.pgov{position:absolute;inset-inline:0;pointer-events:none;box-shadow:0 2px 12px #0004;border-radius:2px;z-index:2;font-size:11px;color:var(--pgt)}
+.pgov .h,.pgov .f{position:absolute;inset-inline:0;text-align:center;opacity:.6}
+.t-pagebreak{border:1px dashed var(--ac)!important;text-align:center;font-size:.8em;color:var(--ac);padding:.2em}
+.toci{display:flex;align-items:baseline;gap:6px}.toci.sub{padding-inline-start:1.2em;font-size:.95em}.toci i{flex:1;border-bottom:1px dotted #8888;margin-bottom:.3em}.toc-pg{min-width:1.5em;text-align:end;font-weight:400}
+
 .dr input.in{width:auto;max-width:170px}
 .page[data-nocat="1"] .sh select{display:none}
-@media(max-width:900px){.tgl{display:inline-block}aside{position:fixed;top:0;bottom:0;z-index:30;transition:transform .2s}#add{right:0;transform:translateX(100%)}#set{left:0;transform:translateX(-100%)}aside.open{transform:none;box-shadow:0 0 20px #0006}.page{padding:16px!important}.cmp{grid-template-columns:1fr}body.fs aside{display:block}}
+@media(max-width:900px){.tgl{display:inline-block}aside{position:fixed;top:0;bottom:0;z-index:30;transition:transform .2s}#add{right:0;transform:translateX(100%)}#set{left:0;transform:translateX(-100%)}aside.open{transform:none;box-shadow:0 0 20px #0006}.page{padding:16px!important;width:100%;max-width:100%}.cmp{grid-template-columns:1fr}body.fs aside{display:block}}
 @media print{html,body{height:auto;background:#fff}.hd,#fmt,#fb,aside,.no-print,#toast,.ov{display:none!important}main,#stage{display:block;overflow:visible;padding:0}
-.page{box-shadow:none;width:auto;min-height:0;padding:0!important;margin:0;background:#fff;color:#000}.blk{border-color:transparent!important;break-inside:avoid;padding:.2em .4em}
-.hid,.stuh,.dim{display:none}.t-heading,.t-subheading{break-after:avoid}body.bw .page{filter:grayscale(1)}.sh select{appearance:none;-webkit-appearance:none}.ed:empty::before{content:none}}
+.page{box-shadow:none;width:auto;min-height:0;padding:0!important;margin:0;background:#fff;color:#000}.blk{border-color:transparent!important;break-inside:auto;padding:.2em .4em}.blk.keep,tr{break-inside:avoid}.blk.pbb{break-before:page}.ed{orphans:2;widows:2}.sh{break-after:avoid}
+.hid,.stuh,.dim{display:none}.t-heading,.t-subheading{break-after:avoid}body.bw .page{filter:grayscale(1)}.sh select{appearance:none;-webkit-appearance:none}.ed:empty::before{content:none}.page.pg{background:#fff!important;min-height:0!important}.pgov,.pgap,.pbk-line{display:none!important}.page.pg .ph,.page.pg .pf{display:block}.t-pagebreak{break-after:page;height:0;padding:0;margin:0;border:0!important;overflow:hidden}}
+
+.page{text-align:var(--ta,start)}.t-source .ed{font-family:var(--sf,inherit)}
+.page.two{background:none;box-shadow:none;padding:0!important;min-height:0;width:var(--pw)}
+.sheet{position:relative;width:var(--pw);min-height:var(--ph);padding:var(--m);margin:0 auto 16px;background:var(--pg);color:var(--pgt);box-shadow:0 2px 14px #0003}
+.sheet .cols{display:grid;grid-template-columns:repeat(var(--nc,2),minmax(0,1fr));gap:var(--cg,10mm);min-height:calc(var(--ph) - 2*var(--m))}
+.sheet .col{position:relative;min-width:0}
+.sheet[data-rule="1"] .col+.col::before{content:"";position:absolute;inset-block:0;inset-inline-start:calc(var(--cg,10mm)/-2);border-inline-start:1px solid #8886}
+.sheet .ph,.sheet .ttl1{margin-bottom:.5em}
+.mt{position:absolute;visibility:hidden;inset-inline-start:0;top:0;pointer-events:none}
+.sov,.pgov{font-size:11px}.sov{position:absolute;inset:0;pointer-events:none;color:var(--pgt)}
+.sov .h,.sov .f{position:absolute;inset-inline:0;text-align:center;opacity:.6}
+.pgov .w,.sov .w{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 80px Rubik,sans-serif;opacity:.07;transform:rotate(-30deg);white-space:nowrap}
+.wm{display:none}
+.page[data-orn=line] .t-heading .ed{border-bottom:2px solid var(--pac);padding-bottom:.15em}
+.page[data-orn=double] .t-heading .ed{border-block:3px double var(--pac);padding:.15em}
+.page[data-orn=box] .t-heading .ed{border:2px solid var(--pac);border-radius:10px;padding:.2em}
+.page[data-orn=band] .t-heading .ed{background:var(--pac);color:#fff;border-radius:6px;padding:.2em}
+.page[data-orn=star] .t-heading .ed::before,.page[data-orn=star] .t-heading .ed::after{content:"✦";color:var(--pac);margin-inline:.5em;font-size:.6em;vertical-align:middle}
+.page[data-orn=fleur] .t-heading .ed::before,.page[data-orn=fleur] .t-heading .ed::after{content:"❦";color:var(--pac);margin-inline:.5em;font-size:.7em;vertical-align:middle}
+.page[data-orn]:not([data-orn=""]) .t-subheading .ed{border-inline-start:4px solid var(--pac);padding-inline-start:.4em}
+.page hr{border:0;border-top:2px solid #8888;margin:.4em 0}
+.page[data-div=dots] hr{border-top:3px dotted var(--pac)}.page[data-div=dash] hr{border-top:2px dashed var(--pac)}.page[data-div=double] hr{border-top:4px double var(--pac)}
+.page[data-div=star] hr,.page[data-div=fleur] hr{border:0;height:1.2em;overflow:visible;text-align:center}
+.page[data-div=star] hr::after{content:"✦  ✦  ✦";color:var(--pac);display:block}.page[data-div=fleur] hr::after{content:"❧";color:var(--pac);display:block;font-size:1.3em}
+.page[data-bst=box] .t-source{border:1.5px solid var(--pac);background:none;border-radius:4px}
+.page[data-bst=round] .t-source{border:1px solid var(--pac);border-radius:16px}
+.page[data-bst=shadow] .t-source{border:0;background:var(--pg);box-shadow:0 1px 7px #0003;border-radius:10px}
+.page[data-bst=tint] .t-source{border:0;border-radius:8px;background:color-mix(in srgb,var(--pac) 14%,transparent)}
+.page[data-bst=double] .t-source{border:4px double var(--pac);background:none}
+.page[data-bst=plain] .t-source{border:0;background:none;padding-inline:0}
+@media print{*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{background:var(--pbg,#fff)!important}.page.pg{background:var(--pbg,#fff)!important}
+.page.two{display:block}.sheet{width:auto;min-height:0;padding:0!important;margin:0;box-shadow:none;background:var(--pbg,#fff);color:#000;break-after:page}.sheet:last-child{break-after:auto}.sheet .cols{min-height:0}.sov{display:none}
+.mbx .ph,.mbx .pf{display:none!important}
+.wm{display:flex;position:fixed;inset:0;align-items:center;justify-content:center;font:700 90px Rubik,sans-serif;color:#000;opacity:.07;transform:rotate(-30deg);pointer-events:none;z-index:9;white-space:nowrap}}
 </style>
 <style id="pgstyle"></style>
 </head>
 <body>
+<div class="wm" id="wm"></div><datalist id="fsl"><option>10<option>12<option>14<option>16<option>18<option>20<option>24<option>28<option>32<option>40<option>48<option>64</datalist>
 <header class="hd no-print">
 <button class="b tgl" data-h="tg1" aria-label="תפריט הוספת בלוקים" title="בלוקים">☰</button>
 <strong class="brand">בונה דפי מקורות</strong>
@@ -93,11 +136,12 @@ figure{margin:0 auto;text-align:center}img{max-width:100%;height:auto;border:1px
 <button class="b" id="redo" data-h="redo" title="ביצוע מחדש (Ctrl+Y)" aria-label="ביצוע מחדש">↷</button>
 <button class="b" data-h="find" title="חיפוש (Ctrl+F)" aria-label="חיפוש">🔍</button>
 <button class="b" data-h="print" title="הדפסה (Ctrl+P)">הדפסה</button>
+<button class="b pr" data-h="pdf" title="ייצוא PDF מסודר">PDF</button>
 <button class="b" data-h="exp" title="ייצוא (Ctrl+Shift+S)">ייצוא</button>
 <button class="b" data-h="theme" title="מצב כהה / בהיר" aria-label="מצב כהה או בהיר">🌓</button>
 <button class="b" data-h="fs" title="מסך מלא" aria-label="מסך מלא">⛶</button>
 <button class="b tgl" data-h="tg2" title="הגדרות" aria-label="הגדרות">⚙</button>
-<span id="st" class="st" role="status"></span>
+<button class="b" data-h="pgp" title="עמוד קודם" aria-label="עמוד קודם">›</button><span id="pgc" style="font-size:12px;color:var(--mut)" role="status"></span><button class="b" data-h="pgn" title="עמוד הבא" aria-label="עמוד הבא">‹</button><span id="st" class="st" role="status"></span>
 </header>
 <div id="fmt" class="no-print" role="toolbar" aria-label="עיצוב טקסט">
 <button class="b sm" data-cmd="bold" title="מודגש (Ctrl+B)" aria-label="מודגש"><b>B</b></button>
@@ -108,8 +152,8 @@ figure{margin:0 auto;text-align:center}img{max-width:100%;height:auto;border:1px
 <button class="b sm" data-cmd="createLink">קישור</button><button class="b sm" data-cmd="insertHorizontalRule">קו</button><button class="b sm" data-cmd="removeFormat">ניקוי עיצוב</button><button class="b sm" data-h="clean" title="ניקוי טקסט מודבק בבלוק הנבחר">🧹 ניקוי טקסט</button><button class="b sm" data-hl="rgba(250,204,21,.5)" title="מונח מרכזי" aria-label="סימון מונח מרכזי">🟨</button><button class="b sm" data-hl="rgba(59,130,246,.35)" title="ראיה" aria-label="סימון ראיה">🟦</button><button class="b sm" data-hl="rgba(239,68,68,.35)" title="קושיה" aria-label="סימון קושיה">🟥</button><button class="b sm" data-hl="rgba(34,197,94,.35)" title="תשובה" aria-label="סימון תשובה">🟩</button>
 <label>צבע <input type="color" data-cmdv="foreColor" value="#000000" aria-label="צבע טקסט"></label>
 <label>רקע <input type="color" data-cmdv="hiliteColor" value="#ffff66" aria-label="צבע רקע"></label>
-<select class="in" data-cmdv="fontName" aria-label="גופן"><option value="">גופן</option><option>Rubik</option><option>Assistant</option><option>Arial</option><option>David</option></select>
-<select class="in" data-cmdv="fontSize" aria-label="גודל"><option value="">גודל</option><option value="2">קטן</option><option value="3">רגיל</option><option value="5">גדול</option><option value="6">ענק</option></select>
+<select class="in" data-cmdv="fontName" aria-label="גופן"></select>
+<input id="fpx" type="number" class="in" min="6" max="300" step="1" placeholder="px" list="fsl" style="width:66px" aria-label="גודל גופן בפיקסלים לטקסט המסומן" title="גודל גופן (px) לטקסט המסומן – כל ערך">
 </div>
 <div id="fb" hidden class="no-print">
 <input id="fq" class="in" placeholder="חיפוש במסמך..." aria-label="חיפוש"><input id="fr" class="in" placeholder="החלפה ב..." aria-label="טקסט להחלפה">
@@ -119,9 +163,9 @@ figure{margin:0 auto;text-align:center}img{max-width:100%;height:auto;border:1px
 <main>
 <aside id="add" class="no-print" aria-label="הוספת בלוקים">
 <h3>הוספת בלוק</h3><div class="grid" id="addg"></div>
-<h3>מבנה המסמך</h3><div id="ol"></div>
+<h3>מבנה המסמך</h3><div id="ol"></div><h3>עמודים</h3><div class="grid" id="pgl"></div>
 <h3>ספריית מקורות</h3><div class="grid"><button class="b" data-h="lib">📚 הספרייה שלי</button><button class="b" data-h="cats">⚙ קטגוריות</button><button class="b" data-h="sef">🌐 הוסף מקור מספריא</button><button class="b" data-h="cmp">⚖️ השווה מקורות</button><button class="b" data-h="fnd">🤖 זיהוי מקורות מטקסט</button></div><h3>מסמכים</h3>
-<div class="grid"><button class="b" data-h="open">המסמכים שלי</button><button class="b" data-h="new">תבניות</button><button class="b" data-h="imp">ייבוא</button><button class="b" data-h="exp">ייצוא</button><button class="b" data-h="bak">ייצוא גיבוי</button><button class="b" data-h="res">שחזור מגיבוי</button></div>
+<div class="grid"><button class="b" data-h="open">המסמכים שלי</button><button class="b" data-h="new">תבניות</button><button class="b" data-h="imp">ייבוא</button><button class="b" data-h="exp">ייצוא</button><button class="b" data-h="bak">ייצוא גיבוי</button><button class="b" data-h="copy">📋 העתק כטקסט</button><button class="b" data-h="res">שחזור מגיבוי</button></div>
 </aside>
 <div id="stage"><article id="page" class="page" dir="rtl"></article></div>
 <aside id="set" class="no-print" aria-label="הגדרות"></aside>
@@ -136,12 +180,12 @@ const rx=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
 const uid=p=>p+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 const X=e=>e.target.closest('[data-x]')?.dataset.x;
 const K='bonehDapeiMekorot.v1';
-const TY={source:['📖','מקור'],text:['📝','טקסט'],heading:['🏷️','כותרת'],subheading:['🔖','כותרת משנה'],quote:['💬','ציטוט'],note:['💡','הערה'],question:['❓','שאלה'],answer:['✅','תשובה'],summary:['🧠','סיכום'],important:['⭐','נקודה חשובה'],info:['ℹ️','תיבת מידע'],list:['📋','רשימה'],sourceslist:['📚','רשימת מקורות'],table:['📊','טבלה'],image:['🖼️','תמונה'],link:['🔗','קישור'],divider:['➖','קו מפריד'],compare:['⚖️','מחלוקת / השוואה']};
+const TY={source:['📖','מקור'],text:['📝','טקסט'],heading:['🏷️','כותרת'],subheading:['🔖','כותרת משנה'],quote:['💬','ציטוט'],note:['💡','הערה'],question:['❓','שאלה'],answer:['✅','תשובה'],summary:['🧠','סיכום'],important:['⭐','נקודה חשובה'],info:['ℹ️','תיבת מידע'],list:['📋','רשימה'],sourceslist:['📚','רשימת מקורות'],table:['📊','טבלה'],image:['🖼️','תמונה'],link:['🔗','קישור'],divider:['➖','קו מפריד'],compare:['⚖️','מחלוקת / השוואה'],toc:['📑','תוכן עניינים'],pagebreak:['⤓','מעבר עמוד']};
 const TEXTY=['text','heading','subheading','quote','note','question','answer','summary','important','info'];
 const LBL=['note','question','answer','summary','important','info','sourceslist'];
 const RICH=['html','html2','note','cap'];
 const STY=['תנ"ך','משנה','תלמוד בבלי','תלמוד ירושלמי','מדרש','רמב"ם','טור','בית יוסף','שולחן ערוך','משנה ברורה','ראשונים','אחרונים','ספרי מחשבה','חסידות','ספר','מאמר','מקור אחר'];
-const DEF={font:'Rubik',fs:16,lh:1.5,margin:'normal',mm:20,style:'classic',num:'1',head:'',foot:'',cols:1,cat:true,pn:true,showTitle:false,color:true,ac:'#1f6f68'};
+const DEF={font:'Rubik',fs:16,lh:1.5,margin:'normal',mm:20,style:'classic',num:'1',head:'',foot:'',cols:1,cat:true,paper:'A4',land:false,pn:true,showTitle:false,color:true,ac:'#1f6f68',cg:10,rule:false,orn:'',div:'',bst:'',bg:'',just:false,bsp:0.7,hs:1,hfont:'',sfont:'',h1new:false,nosplit:false,pnfmt:'n',pnpos:'center',wm:''};
 const TPL=[['דף מקורות רגיל',['heading:דף מקורות','text:נושא: ','source','source','source','question','summary']],
 ['דף חברותא',['heading:דף חברותא','subheading:שאלה לעיון','question','source','source','question','summary']],
 ['דף שיעור',['heading:דף שיעור','subheading:מבוא','text','subheading:מקורות','source','source','summary']],
@@ -160,7 +204,7 @@ const MM={narrow:12,normal:20,wide:28},mmOf=s=>s.margin==='custom'?(+s.mm||20):(
 /* ---------- sanitizer ---------- */
 const OK=new Set(['B','I','U','S','STRONG','EM','BR','SPAN','FONT','UL','OL','LI','A','DIV','P','H1','H2','H3','SUB','SUP','HR']);
 const BAD=/^(SCRIPT|STYLE|IFRAME|OBJECT|EMBED|LINK|META|SVG|MATH|FORM|TEXTAREA|INPUT|BUTTON|SELECT|NOSCRIPT|TEMPLATE)$/;
-function clean(html){const d=new DOMParser().parseFromString('<body>'+html,'text/html');
+function clean(html){const d=new DOMParser().parseFromString('<body>'+html,'text/html');d.querySelectorAll('.pgsp').forEach(x=>x.remove());
 (function w(n){[...n.childNodes].forEach(c=>{if(c.nodeType===3)return;if(c.nodeType!==1){c.remove();return}
 if(!OK.has(c.tagName)){if(BAD.test(c.tagName)){c.remove();return}w(c);c.replaceWith(...c.childNodes);return}
 w(c);[...c.attributes].forEach(a=>{const k=a.name;if(k==='href'&&/^(https?:|mailto:)/i.test(a.value))return;
@@ -197,11 +241,11 @@ function saveNow(){try{localStorage.setItem(K,JSON.stringify({docs:S.docs,cur:S.
 function initHist(){S.hist=[JSON.stringify(D())];S.hi=0}
 function snap(){const j=JSON.stringify(D());if(S.hist[S.hi]===j)return;S.hist=S.hist.slice(0,S.hi+1);S.hist.push(j);if(S.hist.length>100)S.hist.shift();S.hi=S.hist.length-1}
 function commit(){S.lu=[];D().updated=Date.now();snap();save();chrome()}
-function typed(){setStatus('שומר…');clearTimeout(typeT);typeT=setTimeout(commitTyped,500)}
+function typed(){setStatus('שומר…');clearTimeout(typeT);typeT=setTimeout(commitTyped,500);clearTimeout(pgT);pgT=setTimeout(paginate,250)}
 function commitTyped(){clearTimeout(typeT);if(!dirty.size)return;dirty.forEach(id=>{const b=D().blocks.find(x=>x.id===id);if(b)cleanB(b)});dirty.clear();commit()}
 function mut(fn){commitTyped();fn();commit();render()}
 function restore(){const d=fixDoc(JSON.parse(S.hist[S.hi]));const i=S.docs.findIndex(x=>x.id===d.id);if(i<0)return;S.docs[i]=d;render();save()}
-function undo(){if(S.lu.length&&!dirty.size){Object.assign(S.lib,JSON.parse(S.lu.pop()));saveNow();render();toast('הקטגוריה שוחזרה');return}commitTyped();if(S.hi>0){S.hi--;restore()}}
+function undo(){if(S.lu.length&&!dirty.size){S.lu.pop()();saveNow();render();toast('שוחזר');return}commitTyped();if(S.hi>0){S.hi--;restore()}}
 function redo(){commitTyped();if(S.hi<S.hist.length-1){S.hi++;restore()}}
 function openDoc(id){commitTyped();S.cur=id;S.sel=null;initHist();render();save()}
 
@@ -212,31 +256,33 @@ const confirmD=(m,ok='אישור')=>dlg(`<p>${esc(m)}</p><div class="row"><butto
 const promptD=(m,v='')=>dlg(`<p>${esc(m)}</p><input class="in" style="width:100%" value="${esc(v)}"><div class="row"><button class="b" data-x="0">ביטול</button><button class="b pr" data-x="1">אישור</button></div>`,(o,c)=>{const i=$('input',o),ok=()=>c(i.value.trim()||null);o.addEventListener('click',e=>{const x=X(e);if(x==='1')ok();else if(x==='0')c(null)});i.addEventListener('keydown',e=>{if(e.key==='Enter')ok()})});
 const ago=t=>{const m=Math.round((Date.now()-t)/6e4);if(m<1)return'עכשיו';if(m===1)return'לפני דקה';if(m<60)return`לפני ${m} דקות`;const h=Math.round(m/60);if(h<24)return h===1?'לפני שעה':`לפני ${h} שעות`;return new Date(t).toLocaleDateString('he-IL')};
 function dl(name,text,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:type+';charset=utf-8'}));a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
+const slT=(x,sc)=>[sc?x.stype:'',x.ref].filter(Boolean).join(' – ')||x.stype;
 const numLabel=(n,m)=>{const H='אבגדהוזחטיכלמנסעפצקרשת',h=n<=22?H[n-1]:n;return m==='1'?n:m==='א'?h:m==='א.'?h+'.':m==='מקור'?'מקור '+n:''};
 
 /* ---------- render ---------- */
-function bh(b,n){const [ic,lb]=TY[b.type],lk=b.locked,ed=lk?'false':'true',mode=S.ui.mode,s=D().settings;
+function bh(b,n,i){const [ic,lb]=TY[b.type],lk=b.locked,ed=lk?'false':'true',mode=S.ui.mode,s=D().settings;
 const F=(f,ph)=>`<div class="ed" data-f="${f}" contenteditable="${ed}" data-ph="${ph||''}">${b[f]||''}</div>`;let h='';
 switch(b.type){
-case'source':{const nl=numLabel(n,s.num);h=`<div class="sh">${nl!==''?`<b class="no">${esc(nl)}</b>`:''}<select data-f="stype"${lk?' disabled':''} aria-label="סוג מקור">${cn(b.stype).map(t=>`<option${t===b.stype?' selected':''}>${esc(t)}</option>`).join('')}</select><input class="ref" data-f="ref" value="${esc(b.ref)}" placeholder="מראה מקום (למשל ברכות ב ע&quot;א)" aria-label="מראה מקום"${lk?' readonly':''}>${lk?'':'<button class="b sm no-print" data-a="refb" title="בונה מראה מקום" aria-label="בונה מראה מקום">🧩</button><button class="b sm no-print" data-a="tolib" title="שמירה בספרייה" aria-label="שמירה בספרייה">⭐</button>'+(b.sref?'<button class="b sm no-print" data-a="rel" title="מקורות קשורים" aria-label="מקורות קשורים">🔗</button>':'')}</div>${F('html','טקסט המקור')}<div class="nt">${F('note','הערה / ביאור')}</div>`;break}
+case'source':{const nl=numLabel(n,s.num);h=`<div class="sh">${nl!==''?`<b class="no">${esc(nl)}</b>`:''}<select data-f="stype"${lk?' disabled':''} aria-label="סוג מקור">${cn(b.stype).map(t=>`<option${t===b.stype?' selected':''}>${esc(t)}</option>`).join('')}</select><input class="ref" data-f="ref" value="${esc(b.ref)}" placeholder="מראה מקום (למשל ברכות ב ע&quot;א)" aria-label="מראה מקום"${lk?' readonly':''}>${lk?'':'<button class="b sm no-print" data-a="refb" title="בונה מראה מקום" aria-label="בונה מראה מקום">🧩</button><button class="b sm no-print" data-a="tolib" title="שמירה בספרייה" aria-label="שמירה בספרייה">⭐</button>'+(b.sref?'<button class="b sm no-print" data-a="rel" title="מקורות קשורים" aria-label="מקורות קשורים">🔗</button>':'')}</div>${F('html','טקסט המקור')}${(b.noteOn||plain(b.note))?`<div class="nt">${F('note','הערה / ביאור')}</div>`:''}`;break}
 case'compare':h=`<div class="cmp">${F('html','שיטה א')}${F('html2','שיטה ב')}</div>`;break;
 case'table':h=`<table><tbody>${b.rows.map((r,ri)=>`<tr>${r.map((c,ci)=>{const t=ri===0&&b.head?'th':'td';return`<${t} contenteditable="${ed}" data-r="${ri}" data-c="${ci}">${c}</${t}>`}).join('')}</tr>`).join('')}</tbody></table>`+(lk?'':`<div class="tb no-print">${[['tr+','+ שורה'],['tr-','− שורה'],['tc+','+ עמודה'],['tc-','− עמודה'],['th','שורת כותרת']].map(x=>`<button class="b sm" data-a="${x[0]}">${x[1]}</button>`).join('')}</div>`);break;
 case'image':h=b.src?`<figure style="width:${+b.w||60}%"><img src="${esc(b.src)}" alt="${esc(plain(b.cap))}">${F('cap','כיתוב')}</figure>`+(lk?'':`<div class="tb no-print"><input type="range" min="20" max="100" value="${+b.w||60}" data-f="w" aria-label="גודל התמונה"><button class="b sm" data-a="imgx">הסרת תמונה</button></div>`):`<div class="tb no-print"><label class="b">בחירת תמונה מהמחשב<input type="file" accept="image/*" data-a="img" hidden></label><small>אפשר גם לגרור תמונה לדף</small></div>`;break;
 case'link':h=`<div class="lk2${b.url?' no-print':''}"><input data-f="label" value="${esc(b.label)}" placeholder="טקסט להצגה" aria-label="טקסט להצגה"><input data-f="url" dir="ltr" value="${esc(b.url)}" placeholder="https://..." aria-label="כתובת"></div>${b.url?`<a href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">${esc(b.label||b.url)}</a>`:''}`;break;
-case'sourceslist':h=`<ol>${D().blocks.filter(x=>x.type==='source'&&!x.hidden).map(x=>`<li>${esc(x.stype)}${x.ref?' – '+esc(x.ref):''}</li>`).join('')}</ol>`;break;
-case'divider':h='<hr>';break;
+case'sourceslist':h=(lk?'':`<label class="no-print" style="font-size:.8em"><input type="checkbox" data-f="showCat"${b.showCat?' checked':''}> הצג קטגוריה לצד כל מקור</label>`)+`<ol>${D().blocks.filter(x=>x.type==='source'&&!x.hidden).map(x=>`<li>${esc(slT(x,b.showCat))}</li>`).join('')}</ol>`;break;
+case'pagebreak':h='<div class="pbk-line no-print">⤓ מעבר עמוד – התוכן הבא יתחיל בעמוד חדש</div>';break;case'toc':h=`<div class="lb">📑 תוכן עניינים</div><div class="toc">${tocHtml()}</div>`;break;case'divider':h='<hr>';break;
 default:h=F('html',lb)}
 const dim=S.ui.tag&&!b.tags.includes(S.ui.tag);
-const cls=`blk t-${b.type}${b.hidden?' hid':''}${lk?' lk':''}${S.sel===b.id?' sel':''}${dim?' dim':''}${mode==='student'&&b.type==='answer'?' stuh':''}`;
-const tb=`<div class="bt no-print"><span class="dh" draggable="true" title="גרירה" role="button" aria-label="גרירה">⠿</span><button data-a="up" title="הזזה למעלה" aria-label="הזזה למעלה">↑</button><button data-a="down" title="הזזה למטה" aria-label="הזזה למטה">↓</button><button data-a="dup" title="שכפול (Ctrl+D)" aria-label="שכפול">⧉</button><button data-a="lock" title="${lk?'ביטול נעילה':'נעילה'}" aria-label="נעילה" aria-pressed="${lk}">${lk?'🔒':'🔓'}</button><button data-a="hide" title="${b.hidden?'הצגה':'הסתרה'}" aria-label="הסתרה" aria-pressed="${!!b.hidden}">${b.hidden?'🙈':'👁'}</button>${TEXTY.includes(b.type)?`<select data-a="type" title="שינוי סוג" aria-label="שינוי סוג">${TEXTY.map(t=>`<option value="${t}"${t===b.type?' selected':''}>${TY[t][1]}</option>`).join('')}</select>`:''}<button data-a="del" title="מחיקה (Delete)" aria-label="מחיקה">🗑</button></div>`;
-return`<section class="${cls}" data-id="${b.id}"${b.type==='source'?catStyle(b):''}>${tb}${LBL.includes(b.type)?`<div class="lb">${ic} ${lb}</div>`:''}${h}${b.type==='question'&&mode==='student'?'<div class="lines"></div>':''}<input class="tags no-print" data-f="tags" value="${esc(b.tags.join(', '))}" placeholder="תגיות (מופרדות בפסיק)" aria-label="תגיות"></section>`}
-function render(){const d=D(),s=d.settings,p=$('#page');p.dataset.style=s.style;p.dataset.cols=s.cols;p.dataset.nocat=s.cat===false?1:0;const st=p.style;
-st.setProperty('--ff',`"${s.font}",Rubik,Assistant,Arial,sans-serif`);st.setProperty('--fs',s.fs);st.setProperty('--lh',s.lh);st.setProperty('--m',mmOf(s)+'mm');st.setProperty('--pac',s.ac);
-$('#pgstyle').textContent=`@page{size:A4;margin:${mmOf(s)}mm${s.pn?';@bottom-center{content:counter(page);font:11px sans-serif}':''}}`;
+const cls=`blk t-${b.type}${(b.keep||s.nosplit)?' keep':''}${(b.pageBefore||(i>0&&s.h1new&&b.type==='heading'))?' pbb':''}${b.hidden?' hid':''}${lk?' lk':''}${S.sel===b.id?' sel':''}${dim?' dim':''}${mode==='student'&&b.type==='answer'?' stuh':''}`;
+const tb=`<div class="bt no-print"><span class="dh" draggable="true" title="גרירה" role="button" aria-label="גרירה">⠿</span><button data-a="up" title="הזזה למעלה" aria-label="הזזה למעלה">↑</button><button data-a="down" title="הזזה למטה" aria-label="הזזה למטה">↓</button><button data-a="dup" title="שכפול (Ctrl+D)" aria-label="שכפול">⧉</button><button data-a="lock" title="${lk?'ביטול נעילה':'נעילה'}" aria-label="נעילה" aria-pressed="${lk}">${lk?'🔒':'🔓'}</button><button data-a="hide" title="${b.hidden?'הצגה':'הסתרה'}" aria-label="הסתרה" aria-pressed="${!!b.hidden}">${b.hidden?'🙈':'👁'}</button>${TEXTY.includes(b.type)?`<select data-a="type" title="שינוי סוג" aria-label="שינוי סוג">${TEXTY.map(t=>`<option value="${t}"${t===b.type?' selected':''}>${TY[t][1]}</option>`).join('')}</select>`:''}<button data-a="keep" title="אל תפצל בין עמודים" aria-label="אל תפצל בין עמודים" aria-pressed="${!!b.keep}">🧷</button><button data-a="pbb" title="התחל בעמוד חדש" aria-label="התחל בעמוד חדש" aria-pressed="${!!b.pageBefore}">⤒</button>${b.type==='source'?'<button data-a="note" title="הוספה/הסרה של הערה" aria-label="הערה" aria-pressed="'+!!(b.noteOn||plain(b.note))+'">💬</button>':''}<button data-a="tags" title="הוספה/הסרה של תגיות" aria-label="תגיות" aria-pressed="${!!(b.tags.length||b.tagsOn)}">🏷</button><button data-a="del" title="מחיקה (Delete)" aria-label="מחיקה">🗑</button></div>`;
+return`<section class="${cls}" data-id="${b.id}"${b.type==='source'?catStyle(b):''}>${tb}${LBL.includes(b.type)?`<div class="lb">${ic} ${lb}</div>`:''}${h}${b.type==='question'&&mode==='student'?'<div class="lines"></div>':''}<input class="tags no-print${b.tags.length||b.tagsOn?' tgon':''}" data-f="tags" value="${esc(b.tags.join(', '))}" placeholder="תגיות (מופרדות בפסיק)" aria-label="תגיות"></section>`}
+function render(){const d=D(),s=d.settings,p=$('#page');p.dataset.style=s.style;p.dataset.cols=s.cols;p.dataset.nocat=s.cat===false?1:0;p.dataset.orn=s.orn||'';p.dataset.div=s.div||'';p.dataset.bst=s.bst||'';const st=p.style;
+const sv=(k,v)=>v?st.setProperty(k,v):st.removeProperty(k),fq=x=>x?'"'+String(x).replace(/["\\]/g,'')+'",Rubik,Assistant,sans-serif':'',bgc=/^#[0-9a-f]{6}$/i.test(s.bg)?s.bg:'';sv('--hf',fq(s.hfont));sv('--sf',fq(s.sfont));sv('--hs',s.hs);sv('--bs',(+s.bsp||.7)+'em');sv('--ta',s.just?'justify':'');sv('--pg',bgc);sv('--pgt',bgc?'#111':'');sv('--pbg',bgc);$('#wm').textContent=s.wm||'';
+st.setProperty('--ff',`"${s.font}",Rubik,Assistant,Arial,sans-serif`);st.setProperty('--fs',s.fs);st.setProperty('--lh',s.lh);st.setProperty('--m',mmOf(s)+'mm');st.setProperty('--pac',s.ac);{const [pw_,ph_]=pdim(s);st.setProperty('--pw',pw_+'mm');st.setProperty('--ph',ph_+'mm');p.style.minHeight=''}
+$('#pgstyle').textContent=pageCss(s);
 document.body.classList.toggle('bw',!s.color);
-let n=0;const body=d.blocks.map(b=>{if(b.type==='source'&&!b.hidden)n++;return bh(b,n)}).join('');
+let n=0;const body=d.blocks.map((b,i)=>{if(b.type==='source'&&!b.hidden)n++;return bh(b,n,i)}).join('');
 p.innerHTML=(s.head?`<div class="ph">${esc(s.head)}</div>`:'')+(s.showTitle?`<h1 class="ttl1">${esc(d.title)}</h1>`:'')+(body||'<p class="no-print">המסמך ריק. הוסיפו בלוק מהתפריט הצדדי.</p>')+(s.foot?`<div class="pf">${esc(s.foot)}</div>`:'');
-chrome()}
+chrome();requestAnimationFrame(paginate)}
 function chrome(){const d=D();$('#undo').disabled=S.hi<=0&&!S.lu.length;$('#redo').disabled=S.hi>=S.hist.length-1;if(document.activeElement!==$('#ttl'))$('#ttl').value=d.title;
 document.documentElement.dataset.theme=S.ui.theme==='auto'?'':S.ui.theme;syncPanel();markHits();outline()}
 function syncPanel(){const s=D().settings;$$('#set [data-s]').forEach(el=>{if(el===document.activeElement)return;const v=s[el.dataset.s];if(el.type==='checkbox')el.checked=!!v;else el.value=v});
@@ -265,13 +311,13 @@ case'down':if(i<d.blocks.length-1)sw(i+1);break;
 case'dup':mut(()=>{const c=JSON.parse(JSON.stringify(b));c.id=uid('b');c.locked=false;d.blocks.splice(i+1,0,c);S.sel=c.id});toast('הבלוק שוכפל');break;
 case'lock':mut(()=>{b.locked=!b.locked});break;
 case'hide':mut(()=>{b.hidden=!b.hidden});break;
-case'del':confirmD('למחוק את הבלוק?','מחיקה').then(y=>{if(y){mut(()=>{const j=D().blocks.findIndex(x=>x.id===id);D().blocks.splice(j,1);S.sel=null});toast('הבלוק נמחק')}});break;
+case'del':mut(()=>{d.blocks.splice(i,1);S.sel=null});toast('הבלוק נמחק – ↶ לביטול');break;
 case'tr+':mut(()=>b.rows.push(b.rows[0].map(()=>'')));break;
 case'tr-':if(b.rows.length>1)mut(()=>b.rows.pop());break;
 case'tc+':mut(()=>b.rows.forEach(r=>r.push('')));break;
 case'tc-':if(b.rows[0].length>1)mut(()=>b.rows.forEach(r=>r.pop()));break;
 case'th':mut(()=>{b.head=!b.head});break;
-case'imgx':mut(()=>{b.src=''});break;case'refb':refDlg(b);break;case'rel':relDlg(b);break;case'tolib':libAdd(b);break}}
+case'imgx':mut(()=>{b.src=''});break;case'refb':refDlg(b);break;case'rel':relDlg(b);break;case'keep':mut(()=>{b.keep=!b.keep});break;case'pbb':mut(()=>{b.pageBefore=!b.pageBefore});break;case'note':mut(()=>{if(b.noteOn||plain(b.note)){b.note='';b.noteOn=false}else b.noteOn=true;S.sel=id});if(b.noteOn)$('.blk.sel .nt .ed')?.focus();break;case'tags':mut(()=>{if(b.tagsOn||b.tags.length){b.tags=[];b.tagsOn=false}else b.tagsOn=true;S.sel=id});if(b.tagsOn)$('.blk.sel .tags')?.focus();break;case'tolib':libAdd(b);break}}
 function setImg(f,id){if(!f)return;if(!/^image\//.test(f.type))return toast('הקובץ אינו תמונה');if(f.size>1.5e6)return toast('התמונה גדולה מדי (עד 1.5MB)');
 const r=new FileReader();r.onload=()=>{if(!/^data:image\//.test(r.result))return toast('התמונה אינה תקינה');mut(()=>{const d=D();let b=d.blocks.find(x=>x.id===id);if(!b){b=mkB('image');d.blocks.push(b)}b.src=r.result;S.sel=b.id});toast('התמונה נוספה')};r.onerror=()=>toast('קריאת התמונה נכשלה');r.readAsDataURL(f)}
 
@@ -287,24 +333,24 @@ for(const b of d.blocks){if(b.hidden)continue;const p=f=>plain(b[f]);let s='';
 switch(b.type){
 case'heading':s=(md?'## ':'')+p('html');break;
 case'subheading':s=(md?'### ':'')+p('html');break;
-case'source':n++;s=`${md?'**':''}[${[numLabel(n,d.settings.num),b.stype,b.ref].filter(Boolean).join(' – ')}]${md?'**':''}\n${md?'> ':''}${p('html')}${b.note?'\n'+p('note'):''}`;break;
+case'source':n++;s=`${md?'**':''}[${[numLabel(n,d.settings.num),b.stype,b.ref].filter(Boolean).join(' – ')}]${md?'**':''}\n${md?p('html').split('\n').map(l=>'> '+l).join('\n'):p('html')}${plain(b.note)?'\n'+p('note'):''}`;break;
 case'quote':s=(md?'> ':'')+p('html');break;
 case'list':s=p('html').split('\n').filter(Boolean).map(x=>(md?'- ':'• ')+x).join('\n');break;
 case'table':s=b.rows.map((r,i)=>md?'| '+r.map(plain).join(' | ')+' |'+(i===0?'\n|'+r.map(()=>'---|').join(''):''):r.map(plain).join('\t')).join('\n');break;
-case'divider':s=md?'---':'----------';break;
+case'pagebreak':s=md?'---':'──────── עמוד חדש ────────';break;case'toc':s='תוכן עניינים:\n'+d.blocks.filter(x=>['heading','subheading'].includes(x.type)&&!x.hidden).map(x=>(x.type==='subheading'?'  ':'')+'- '+plain(x.html)).join('\n');break;case'divider':s=md?'---':'----------';break;
 case'link':s=md?`[${b.label||b.url}](${b.url})`:`${b.label} ${b.url}`;break;
 case'image':s='[תמונה] '+p('cap');break;
 case'compare':s=p('html')+'\n'+(md?'---':'-----')+'\n'+p('html2');break;
-case'sourceslist':s=TY.sourceslist[1]+':\n'+d.blocks.filter(x=>x.type==='source'&&!x.hidden).map((x,i)=>`${i+1}. ${x.stype}${x.ref?' – '+x.ref:''}`).join('\n');break;
+case'sourceslist':s=TY.sourceslist[1]+':\n'+d.blocks.filter(x=>x.type==='source'&&!x.hidden).map((x,i)=>`${i+1}. ${slT(x,b.showCat)}`).join('\n');break;
 default:s=TY[b.type][1]+': '+p('html')}
-out.push(s)}
+if(b.tags&&b.tags.length)s+='\n'+b.tags.map(t=>'#'+t.replace(/\s+/g,'_')).join(' ');out.push(s)}
 return out.join('\n\n')}
 function doExport(k){commitTyped();const d=D(),nm=d.title.replace(/[\\/:*?"<>|]/g,'_');
 if(k==='json')dl(nm+'.json',JSON.stringify(d,null,1),'application/json');
 else if(k==='txt')dl(nm+'.txt',conv(d,0),'text/plain');
 else if(k==='md')dl(nm+'.md',conv(d,1),'text/markdown');
-else if(k==='docx')exportDocx(d,nm);
-else{const m=S.ui.mode;if(k==='stu')S.ui.mode='student';if(k==='tea')S.ui.mode='teacher';render();const c=$('#page').cloneNode(true);S.ui.mode=m;render();
+else if(k==='docx')exportDocx(d,nm).catch(()=>toast('ייצוא Word נכשל'));
+else{const m=S.ui.mode;if(k==='stu')S.ui.mode='student';if(k==='tea')S.ui.mode='teacher';render();paginate();const c=$('#page').cloneNode(true);c.style.minHeight='';c.style.background='#fff';c.classList.remove('pg');S.ui.mode=m;render();
 $$('.no-print,.stuh',c).forEach(x=>x.remove());$$('[contenteditable]',c).forEach(x=>x.removeAttribute('contenteditable'));$$('input',c).forEach(x=>x.setAttribute('readonly',''));$$('select',c).forEach(x=>x.setAttribute('disabled',''));
 dl(nm+(k==='stu'?'-תלמיד':k==='tea'?'-מורה':'')+'.html',`<!DOCTYPE html><html lang="he" dir="rtl" data-theme="light"><head><meta charset="utf-8"><title>${esc(d.title)}</title><style>${$('#css').textContent}</style><style>${$('#pgstyle').textContent}</style></head><body style="display:block;height:auto;background:#fff"><main style="display:block">${c.outerHTML}</main></body></html>`,'text/html')}
 toast('המסמך יוצא')}
@@ -333,7 +379,7 @@ if(x==='open'){openDoc(id);c(null)}
 else if(x==='dup'){commitTyped();const n=JSON.parse(JSON.stringify(d));n.id=uid('d');n.title+=' (עותק)';n.created=n.updated=Date.now();S.docs.push(n);saveNow();draw();toast('המסמך שוכפל')}
 else if(x==='ren'){const v=await promptD('שם חדש למסמך',d.title);if(v){d.title=v;if(d.id===S.cur)commit();else{d.updated=Date.now();save()}draw();chrome()}}
 else if(x==='exp'){dl(d.title.replace(/[\\/:*?"<>|]/g,'_')+'.json',JSON.stringify(d,null,1),'application/json');toast('המסמך יוצא')}
-else if(x==='del'){if(await confirmD(`למחוק את "${d.title}"?`,'מחיקה')){S.docs=S.docs.filter(z=>z.id!==id);if(!S.docs.length)S.docs=[mkDoc('מסמך חדש',[])];if(!S.docs.some(z=>z.id===S.cur)){S.cur=S.docs[0].id;S.sel=null;initHist();render()}saveNow();draw();toast('המסמך נמחק')}}})})}
+else if(x==='del'){const ix=S.docs.indexOf(d);S.docs=S.docs.filter(z=>z.id!==id);let nd=null;if(!S.docs.length){nd=mkDoc('מסמך חדש',[]);S.docs=[nd]}if(!S.docs.some(z=>z.id===S.cur)){S.cur=S.docs[0].id;S.sel=null;initHist();render()}saveNow();draw();S.lu.push(()=>{if(nd)S.docs=S.docs.filter(z=>z!==nd);S.docs.splice(Math.min(ix,S.docs.length),0,d);S.cur=d.id;S.sel=null;initHist()});chrome();toast('המסמך נמחק – ↶ לביטול')}})})}
 
 /* ---------- fullscreen / drawers / print ---------- */
 function exitFs(){document.body.classList.remove('fs');if(document.fullscreenElement)document.exitFullscreen().catch(()=>{})}
@@ -343,7 +389,7 @@ const closeDrawers=()=>$$('aside.open').forEach(x=>x.classList.remove('open'));
 function drawer(id){const a=$('#'+id),o=a.classList.contains('open');closeDrawers();if(!o)a.classList.add('open')}
 function doPrint(){commitTyped();window.print()}
 function toggleTheme(){const dark=S.ui.theme==='dark'||(S.ui.theme==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches);S.ui.theme=dark?'light':'dark';chrome();save()}
-const H={cmp:cmpDlg,fnd:findDlg,sef:sefDlg,lib:libDlg,cats:catDlg,clean:cleanTxt,new:tplDlg,open:docsDlg,save:()=>{commitTyped();saveNow();toast('נשמר')},undo,redo,find:openFind,print:doPrint,exp:expDlg,theme:toggleTheme,fs:toggleFs,imp:()=>{impMode='doc';$('#imp').click()},bak:backup,res:()=>{impMode='backup';$('#imp').click()},tg1:()=>drawer('add'),tg2:()=>drawer('set'),
+const H={pdf:pdfDlg,fit:()=>fitPages(+$$('[data-fit]').pop().value),copy:()=>navigator.clipboard.writeText(conv(D(),0)).then(()=>toast('המסמך הועתק כטקסט')).catch(()=>toast('ההעתקה נכשלה')),pgp:()=>goPage(-1),pgn:()=>goPage(1),cmp:cmpDlg,fnd:findDlg,sef:sefDlg,lib:libDlg,cats:catDlg,clean:cleanTxt,new:tplDlg,open:docsDlg,save:()=>{commitTyped();saveNow();toast('נשמר')},undo,redo,find:openFind,print:doPrint,exp:expDlg,theme:toggleTheme,fs:toggleFs,imp:()=>{impMode='doc';$('#imp').click()},bak:backup,res:()=>{impMode='backup';$('#imp').click()},tg1:()=>drawer('add'),tg2:()=>drawer('set'),
 fnext:findNext,fclose:closeFind,frep:()=>{const n=replaceIn(1);toast(n?'הוחלפה תוצאה אחת':'לא נמצא טקסט להחלפה')},
 frall:async()=>{if(!S.find)return;if(await confirmD('להחליף את כל ההופעות בכל המסמך?','החלף הכול')){toast(`הוחלפו ${replaceIn(0)} תוצאות`)}}};
 
@@ -351,7 +397,7 @@ frall:async()=>{if(!S.find)return;if(await confirmD('להחליף את כל הה
 const page=$('#page');
 page.addEventListener('input',e=>{const t=e.target,bl=t.closest('.blk');if(!bl)return;const b=blk(bl.dataset.id);if(!b||b.locked)return;const f=t.dataset.f;
 if(t.matches('td,th'))b.rows[+t.dataset.r][+t.dataset.c]=t.innerHTML;
-else if(f){if(t.classList.contains('ed'))b[f]=t.innerHTML;else if(f==='tags')b.tags=t.value.split(/[,،]/).map(x=>x.trim()).filter(Boolean);else if(f==='w'){b.w=+t.value;const fg=bl.querySelector('figure');if(fg)fg.style.width=b.w+'%'}else if(f==='url'||f==='stype')return;else b[f]=t.value}
+else if(f){if(t.classList.contains('ed'))b[f]=edHtml(t);else if(f==='tags')b.tags=t.value.split(/[,،]/).map(x=>x.trim()).filter(Boolean);else if(f==='w'){b.w=+t.value;const fg=bl.querySelector('figure');if(fg)fg.style.width=b.w+'%'}else if(f==='url'||f==='stype'||f==='showCat')return;else b[f]=t.value}
 else return;dirty.add(b.id);typed()});
 page.addEventListener('paste',e=>{if(!e.target.closest('.ed,td,th'))return;e.preventDefault();const cd=e.clipboardData,h=cd.getData('text/html');document.execCommand('insertHTML',false,h?clean(h):esc(cd.getData('text/plain')).replace(/\n/g,'<br>'))});
 page.addEventListener('focusin',e=>{const bl=e.target.closest('.blk');if(bl&&S.sel!==bl.dataset.id){S.sel=bl.dataset.id;selUI()}});
@@ -379,12 +425,14 @@ if(t.dataset.a==='type'){mut(()=>{b.type=t.value});return}
 if(t.dataset.a==='img'){setImg(t.files[0],b.id);return}
 if(f==='url'){const u=t.value.trim(),n=u?normUrl(u):'';if(u&&!n)toast('הכתובת אינה תקינה');mut(()=>{b.url=n});return}
 if(f==='stype'){mut(()=>{b.stype=t.value});return}
+if(f==='showCat'){mut(()=>{b.showCat=t.checked});return}
 if(['ref','label','w','tags'].includes(f)){mut(()=>{})}return}
-const s=t.dataset?.s;if(s){const v=t.type==='checkbox'?t.checked:['fs','lh','mm'].includes(s)?+t.value:t.value;mut(()=>{D().settings[s]=v});return}
+const s=t.dataset?.s;if(s){const v=t.type==='checkbox'?t.checked:['fs','lh','mm','cg','bsp','hs'].includes(s)?+t.value:t.value;if(typeof v==='number'&&!(v>0)&&s!=='mm')return;mut(()=>{D().settings[s]=v});return}
 const u=t.dataset?.u;if(u){S.ui[u]=t.value;render();save()}});
 document.addEventListener('keydown',e=>{const k=e.key.toLowerCase(),c=e.ctrlKey||e.metaKey,inp=e.target.matches?.('input,textarea');
 if(k==='escape'){const o=$$('.ov').pop();if(o){o._c(null);return}if(!$('#fb').hidden){closeFind();return}if(document.body.classList.contains('fs')){exitFs();return}closeDrawers();return}
 if(!c){if(k==='delete'&&S.sel&&!e.target.closest('input,select,textarea,[contenteditable="true"]'))act('del',S.sel);return}
+if(k==='enter'){e.preventDefault();addB('pagebreak');return}
 if(k==='s'){e.preventDefault();if(e.shiftKey)expDlg();else{commitTyped();saveNow();toast('נשמר')}}
 else if(k==='f'){e.preventDefault();openFind()}
 else if(k==='p'){e.preventDefault();doPrint()}
@@ -412,7 +460,7 @@ o.addEventListener('click',async e=>{const x=X(e);if(!x)return;if(x==='close'){c
 const id=e.target.closest('.dr')?.dataset.id,i=S.lib.items.find(z=>z.id===id);if(!i)return;
 if(x==='add'){mut(()=>{const d=D(),b=mkB('source');b.stype=i.cat;b.ref=i.ref;b.html=i.html;b.note=i.note;b.tags=[...i.tags];const j=d.blocks.findIndex(z=>z.id===S.sel);d.blocks.splice(j<0?d.blocks.length:j+1,0,b);S.sel=b.id});toast('המקור נוסף')}
 else if(x==='fav'){i.fav=!i.fav;saveNow();draw()}
-else if(x==='del'&&await confirmD('למחוק מהספרייה?','מחיקה')){S.lib.items=S.lib.items.filter(z=>z!==i);saveNow();draw()}})})}
+else if(x==='del'){const sn=JSON.stringify(S.lib);S.lu.push(()=>Object.assign(S.lib,JSON.parse(sn)));S.lib.items=S.lib.items.filter(z=>z!==i);saveNow();draw();chrome();toast('נמחק – ↶ לביטול')}})})}
 function catDlg(){const L=S.lib;dlg(`<h2>קטגוריות</h2><div id="cl"></div><div class="row"><input class="in" id="cn" placeholder="קטגוריה חדשה" aria-label="קטגוריה חדשה"><button class="b" data-x="cadd">+ קטגוריה</button></div><h2 style="margin-top:16px">סוגי מראה מקום</h2><div id="tl"></div><div class="row"><input class="in" id="tn" placeholder="שם הסוג (למשל ספר החינוך)" aria-label="שם הסוג"><input class="in" id="tf" placeholder="שדות מופרדים בפסיק (מצווה, סעיף)" aria-label="שדות"><button class="b" data-x="tadd">+ סוג</button></div><div class="row"><button class="b" data-x="exp">ייצוא הספרייה</button><button class="b" data-x="imp">ייבוא הספרייה</button><button class="b" data-x="rst">ברירת מחדל</button><button class="b pr" data-x="close">סגירה</button></div><input type="file" id="lfile" accept=".json" hidden>`,(o,c)=>{
 const draw=()=>{$('#cl',o).innerHTML=L.cats.map((k,i)=>`<div class="dr" data-i="${i}"><div><input type="color" value="${k.color}" data-k="color" aria-label="צבע"> <input class="in" style="width:52px" value="${esc(k.icon)}" data-k="icon" aria-label="אייקון"> <input class="in" value="${esc(k.name)}" data-k="name" aria-label="שם"></div><div>${[['up','↑'],['dn','↓'],['hide',k.hidden?'הצג':'הסתר'],['cdel','מחק']].map(x=>`<button class="b sm" data-x="${x[0]}">${x[1]}</button>`).join(' ')}</div></div>`).join('');
 $('#tl',o).innerHTML=L.types.map((t,i)=>`<div class="dr" data-t="${i}"><div><input class="in" value="${esc(t.name)}" data-k="tname" aria-label="שם הסוג"> <input class="in" value="${esc(t.fields.join(', '))}" data-k="tfields" aria-label="שדות"></div><button class="b sm" data-x="tdel">מחק</button></div>`).join('')};
@@ -428,9 +476,9 @@ if(x==='cadd'){const v=$('#cn',o).value.trim();if(v){L.cats.push({id:uid('c'),na
 else if(x==='up'&&i>0)[L.cats[i-1],L.cats[i]]=[L.cats[i],L.cats[i-1]];
 else if(x==='dn'&&i<L.cats.length-1)[L.cats[i+1],L.cats[i]]=[L.cats[i],L.cats[i+1]];
 else if(x==='hide')L.cats[i].hidden=!L.cats[i].hidden;
-else if(x==='cdel'){S.lu.push(JSON.stringify(L));L.cats.splice(i,1);toast('הקטגוריה נמחקה – ביטול (↶ / Ctrl+Z) משחזר')}
+else if(x==='cdel'){{const sn=JSON.stringify(L);S.lu.push(()=>Object.assign(L,JSON.parse(sn)))}L.cats.splice(i,1);toast('הקטגוריה נמחקה – ביטול (↶ / Ctrl+Z) משחזר')}
 else if(x==='tadd'){const nm=$('#tn',o).value.trim();if(nm){L.types.push({id:uid('t'),name:nm,fields:$('#tf',o).value.split(/[,،]/).map(z=>z.trim()).filter(Boolean)});$('#tn',o).value='';$('#tf',o).value=''}}
-else if(x==='tdel'){if(!await confirmD('למחוק את סוג מראה המקום?','מחיקה'))return;L.types.splice(+r.dataset.t,1)}
+else if(x==='tdel'){const sn=JSON.stringify(L);S.lu.push(()=>Object.assign(L,JSON.parse(sn)));L.types.splice(+r.dataset.t,1)}
 else if(x==='exp'){dl('sources-library.json',JSON.stringify({app:'sources-lib',v:1,lib:L},null,1),'application/json');toast('הספרייה יוצאה');return}
 else if(x==='imp'){$('#lfile',o).click();return}
 else if(x==='rst'){if(!await confirmD('קטגוריות וסוגי מראה מקום יוחלפו בברירת המחדל (מקורות בספרייה יישארו). להמשיך?','שחזור'))return;Object.assign(L,{...defLib(),items:L.items})}
@@ -442,32 +490,65 @@ function cleanTxt(){const b=S.sel&&blk(S.sel);if(!b||b.locked||(!TEXTY.includes(
 const crcT=(()=>{const t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
 const crc=u=>{let c=-1;for(const b of u)c=crcT[(c^b)&255]^(c>>>8);return(c^-1)>>>0};
 function zip(files){const E=new TextEncoder(),parts=[],cd=[];let off=0;const w=(a,fn)=>{const dv=new DataView(new ArrayBuffer(a));fn(dv);return new Uint8Array(dv.buffer)};
-for(const[n,txt]of files){const nb=E.encode(n),d=E.encode(txt),cr=crc(d);
+for(const[n,txt]of files){const nb=E.encode(n),d=typeof txt==='string'?E.encode(txt):txt,cr=crc(d);
 parts.push(w(30,v=>{v.setUint32(0,0x04034b50,true);v.setUint16(4,20,true);v.setUint16(6,0x800,true);v.setUint32(14,cr,true);v.setUint32(18,d.length,true);v.setUint32(22,d.length,true);v.setUint16(26,nb.length,true)}),nb,d);
 cd.push(w(46,v=>{v.setUint32(0,0x02014b50,true);v.setUint16(4,20,true);v.setUint16(6,20,true);v.setUint16(8,0x800,true);v.setUint32(16,cr,true);v.setUint32(20,d.length,true);v.setUint32(24,d.length,true);v.setUint16(28,nb.length,true);v.setUint32(42,off,true)}),nb);off+=30+nb.length+d.length}
 const cds=off;let cl=0;cd.forEach(x=>{parts.push(x);cl+=x.length});
 parts.push(w(22,v=>{v.setUint32(0,0x06054b50,true);v.setUint16(8,files.length,true);v.setUint16(10,files.length,true);v.setUint32(12,cl,true);v.setUint32(16,cds,true)}));
 return new Blob(parts,{type:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'})}
-const xe=s=>String(s).replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
-function runs(html,bold){const dd=new DOMParser().parseFromString('<body>'+(html||''),'text/html'),o=[];
-(function w(n,b,i,u){n.childNodes.forEach(c=>{if(c.nodeType===3){if(c.nodeValue)o.push(`<w:r><w:rPr>${b?'<w:b/><w:bCs/>':''}${i?'<w:i/>':''}${u?'<w:u w:val="single"/>':''}<w:rtl/></w:rPr><w:t xml:space="preserve">${xe(c.nodeValue)}</w:t></w:r>`)}else if(c.nodeType===1){if(c.tagName==='BR')o.push('<w:r><w:br/></w:r>');else w(c,b||/^(B|STRONG)$/.test(c.tagName),i||/^(I|EM)$/.test(c.tagName),u||c.tagName==='U')}})})(dd.body,bold,0,0);return o.join('')}
-const para=(h,b,x='')=>`<w:p><w:pPr><w:bidi/>${x}</w:pPr>${runs(h,b)}</w:p>`;
-function exportDocx(d,nm){let n=0;const P=para,o=[P(esc(d.title),1,'<w:jc w:val="center"/>')];
-for(const b of d.blocks){if(b.hidden)continue;const t=b.type;
-if(t==='heading')o.push(P(b.html,1,'<w:jc w:val="center"/><w:outlineLvl w:val="0"/>'));
-else if(t==='subheading')o.push(P(b.html,1,'<w:outlineLvl w:val="1"/>'));
-else if(t==='source'){n++;o.push(P(esc(`[${[numLabel(n,d.settings.num),b.stype,b.ref].filter(Boolean).join(' – ')}]`),1),P(b.html));if(plain(b.note))o.push(P(b.note))}
-else if(t==='table')o.push(`<w:tbl><w:tblPr><w:bidiVisual/><w:tblW w:w="5000" w:type="pct"/><w:tblBorders>${['top','left','bottom','right','insideH','insideV'].map(z=>`<w:${z} w:val="single" w:sz="4" w:color="888888"/>`).join('')}</w:tblBorders></w:tblPr><w:tblGrid>${b.rows[0].map(()=>'<w:gridCol w:w="2000"/>').join('')}</w:tblGrid>${b.rows.map((r,i)=>`<w:tr>${r.map(c=>`<w:tc><w:tcPr><w:tcW w:w="0" w:type="auto"/></w:tcPr>${P(c,b.head&&i===0)}</w:tc>`).join('')}</w:tr>`).join('')}</w:tbl>`,P(''));
-else if(t==='list')plain(b.html).split('\n').filter(Boolean).forEach(x=>o.push(P(esc('• '+x))));
-else if(t==='divider')o.push(P(esc('––––––––––'),0,'<w:jc w:val="center"/>'));
-else if(t==='link')o.push(P(esc(b.label+' '+b.url)));
-else if(t==='image')o.push(P(esc('[תמונה] ')+b.cap));
-else if(t==='compare')o.push(P(b.html),P(b.html2));
-else if(t==='sourceslist')d.blocks.filter(x=>x.type==='source'&&!x.hidden).forEach((x,i)=>o.push(P(esc(`${i+1}. ${x.stype} ${x.ref}`))));
-else o.push(P((t==='text'?'':`<b>${TY[t][1]}: </b>`)+b.html))}
-const doc=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${o.join('')}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="708" w:footer="708" w:gutter="0"/><w:bidi/></w:sectPr></w:body></w:document>`;
-const blob=zip([['[Content_Types].xml','<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>'],['_rels/.rels','<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>'],['word/document.xml',doc]]);
-const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=nm+'.docx';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
+const WNS='xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"';
+const XH='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+const xe=s=>String(s).replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c])),xa=s=>xe(s).replace(/"/g,'&quot;');
+function css2hex(v){v=String(v||'').trim();let m=v.match(/^#([0-9a-f]{6})$/i);if(m)return m[1].toUpperCase();m=v.match(/^#([0-9a-f]{3})$/i);if(m)return m[1].split('').map(x=>x+x).join('').toUpperCase();m=v.match(/rgba?\(([^)]+)\)/);if(!m)return null;const a=m[1].split(',').map(parseFloat),al=a.length>3?a[3]:1;return[0,1,2].map(i=>Math.round(a[i]*al+255*(1-al)).toString(16).padStart(2,'0')).join('').toUpperCase()}
+const tint=(h,al)=>[0,2,4].map(i=>Math.round(parseInt(h.slice(i,i+2),16)*al+255*(1-al)).toString(16).padStart(2,'0')).join('').toUpperCase();
+function runs(html,bold,sz,col){const dd=new DOMParser().parseFromString('<body>'+(html||''),'text/html'),o=[];
+const rp=f=>`<w:rPr>${f.font?`<w:rFonts w:ascii="${xa(f.font)}" w:hAnsi="${xa(f.font)}" w:cs="${xa(f.font)}"/>`:''}${f.b?'<w:b/><w:bCs/>':''}${f.i?'<w:i/><w:iCs/>':''}${f.col?`<w:color w:val="${f.col}"/>`:''}${f.sz?`<w:sz w:val="${f.sz}"/><w:szCs w:val="${f.sz}"/>`:''}${f.u?'<w:u w:val="single"/>':''}${f.bg?`<w:shd w:val="clear" w:color="auto" w:fill="${f.bg}"/>`:''}<w:rtl/></w:rPr>`;
+(function w(n,f){n.childNodes.forEach(c=>{if(c.nodeType===3){if(c.nodeValue)o.push(`<w:r>${rp(f)}<w:t xml:space="preserve">${xe(c.nodeValue)}</w:t></w:r>`)}
+else if(c.nodeType===1){const t=c.tagName;if(t==='BR'){o.push('<w:r><w:br/></w:r>');return}const g={...f};
+if(/^(B|STRONG)$/.test(t))g.b=1;if(/^(I|EM)$/.test(t))g.i=1;if(t==='U')g.u=1;if(t==='A'){g.u=1;g.col='0563C1'}
+if(t==='FONT'){const q=css2hex(c.getAttribute('color'));if(q)g.col=q;if(c.getAttribute('face'))g.font=c.getAttribute('face')}
+const st=c.style;if(st){if(st.color)g.col=css2hex(st.color)||g.col;if(st.backgroundColor)g.bg=css2hex(st.backgroundColor)||g.bg;if(st.fontFamily)g.font=st.fontFamily.split(',')[0].replace(/["']/g,'').trim();if(st.fontWeight==='bold'||+st.fontWeight>=600)g.b=1;if(st.fontStyle==='italic')g.i=1;if(/underline/.test(st.textDecoration||st.textDecorationLine||''))g.u=1}
+w(c,g)}})})(dd.body,{b:bold,sz,col});return o.join('')}
+const para=(h,bold,o={})=>`<w:p><w:pPr>${o.style?`<w:pStyle w:val="${o.style}"/>`:''}${o.keep?'<w:keepNext/>':''}${o.bdr||''}${o.shd?`<w:shd w:val="clear" w:color="auto" w:fill="${o.shd}"/>`:''}<w:bidi/>${o.sp||''}${o.ind||''}${o.jc?`<w:jc w:val="${o.jc}"/>`:''}</w:pPr>${runs(h,bold,o.sz,o.col)}</w:p>`;
+async function exportDocx(d,nm){const st=d.settings,F=['Rubik','Assistant','system-ui'].includes(st.font)?'Arial':st.font,SZ=Math.round(st.fs*1.5),LN=Math.round(st.lh*240),AC=(/^#[0-9a-f]{6}$/i.test(st.ac)?st.ac:'#1f6f68').slice(1).toUpperCase(),M=Math.round(mmOf(st)*56.7),[PW,PH]=pdim(st).map(v=>Math.round(v*56.7)),CW=PW-2*M,P=para;
+const imgs=[],rels=[];let n=0,idn=0;
+const box=(items,col,fill)=>{const bd=['top','left','bottom','right'].map(z=>`<w:${z} w:val="single" w:sz="6" w:space="4" w:color="${col}"/>`).join('');return items.map((it,k)=>P(it[0],it[1],{bdr:`<w:pBdr>${bd}</w:pBdr>`,shd:fill,sp:`<w:spacing w:before="${k?0:60}" w:after="${k===items.length-1?200:60}"/>`,ind:'<w:ind w:start="160" w:end="160"/>',sz:it[2],col:it[3]})).join('')};
+const tbl=(rows,head)=>`<w:tbl><w:tblPr><w:bidiVisual/><w:tblW w:w="5000" w:type="pct"/><w:tblBorders>${['top','left','bottom','right','insideH','insideV'].map(z=>`<w:${z} w:val="single" w:sz="4" w:space="0" w:color="888888"/>`).join('')}</w:tblBorders></w:tblPr><w:tblGrid>${rows[0].map(()=>`<w:gridCol w:w="${Math.round(CW/rows[0].length)}"/>`).join('')}</w:tblGrid>${rows.map((r,i)=>{const hd=head&&i===0;return`<w:tr>${hd?'<w:trPr><w:tblHeader/></w:trPr>':''}${r.map(c=>`<w:tc><w:tcPr><w:tcW w:w="0" w:type="auto"/>${hd?`<w:shd w:val="clear" w:color="auto" w:fill="${tint(AC,.15)}"/>`:''}</w:tcPr>${P(c,hd)}</w:tc>`).join('')}</w:tr>`}).join('')}</w:tbl>${P('')}`;
+const o=[P(esc(d.title),0,{style:'Title'})];
+for(const b of d.blocks){if(b.hidden)continue;const t=b.type;if(b.pageBefore)o.push('<w:p><w:r><w:br w:type="page"/></w:r></w:p>');
+if(t==='heading')o.push(P(b.html,0,{style:'Heading1'}));
+else if(t==='subheading')o.push(P(b.html,0,{style:'Heading2'}));
+else if(t==='source'){n++;const c=S.lib.cats.find(z=>z.name===b.stype),col=(c?c.color:'#'+AC).slice(1).toUpperCase(),lb=[numLabel(n,st.num),st.cat===false?'':b.stype,b.ref].filter(Boolean).join(' · '),it=[[esc(lb),1,0,col],[b.html]];if(plain(b.note))it.push([`<b>הערה: </b>${b.note}`,0,SZ-2,'555555']);o.push(box(it,col,tint(col,.08)))}
+else if(['note','info','important','question','answer','summary'].includes(t)){const m={note:['FFF7CC','D9B93A'],info:['DCEBFF','3B82F6'],important:['FFDADA','EF4444'],question:['EADFFB','8B5CF6'],answer:['DDF5E3','22C55E'],summary:[tint(AC,.12),AC]}[t];o.push(box([[`<b>${TY[t][1]}: </b>${b.html}`,t==='important']],m[1],m[0]))}
+else if(t==='quote')o.push(box([[`<i>${b.html}</i>`]],'999999','F2F2F2'));
+else if(t==='text')o.push(P(b.html));
+else if(t==='list'){new DOMParser().parseFromString('<body>'+b.html,'text/html').body.querySelectorAll('li').forEach(li=>{const k=[...li.parentElement.children].indexOf(li)+1;o.push(P(esc(li.parentElement.tagName==='OL'?k+'. ':'• ')+li.innerHTML,0,{ind:'<w:ind w:start="360" w:hanging="260"/>',sp:'<w:spacing w:after="40"/>'}))})}
+else if(t==='table')o.push(tbl(b.rows,b.head));
+else if(t==='compare')o.push(tbl([[b.html,b.html2]],false));
+else if(t==='image'&&b.src){const m=b.src.match(/^data:image\/(png|jpe?g|gif);base64,(.+)$/);
+if(m){const ext=m[1]==='jpeg'?'jpg':m[1],bin=Uint8Array.from(atob(m[2]),z=>z.charCodeAt(0)),dim=await new Promise(r=>{const im=new Image();im.onload=()=>r([im.naturalWidth||400,im.naturalHeight||300]);im.onerror=()=>r([400,300]);im.src=b.src;setTimeout(()=>r([400,300]),3000)});
+idn++;const W=Math.round(CW*635*((+b.w||60)/100)),H=Math.round(W*dim[1]/dim[0]);imgs.push([`word/media/image${idn}.${ext}`,bin]);rels.push(`<Relationship Id="rIdImg${idn}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/image${idn}.${ext}"/>`);
+o.push(`<w:p><w:pPr><w:bidi/><w:jc w:val="center"/></w:pPr><w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="${W}" cy="${H}"/><wp:docPr id="${idn}" name="Picture ${idn}" descr="${xa(plain(b.cap))}"/><wp:cNvGraphicFramePr><a:graphicFrameLocks noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic><pic:nvPicPr><pic:cNvPr id="${idn}" name="image${idn}"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rIdImg${idn}"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="${W}" cy="${H}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>`);
+if(plain(b.cap))o.push(P(`<i>${b.cap}</i>`,0,{jc:'center'}))}else o.push(P(esc('[תמונה בפורמט שאינו נתמך בייצוא Word]')))}
+else if(t==='link')o.push(P(`${esc(b.label||'')} <a href="${esc(b.url)}">${esc(b.url)}</a>`));
+else if(t==='pagebreak')o.push('<w:p><w:r><w:br w:type="page"/></w:r></w:p>');else if(t==='toc'){o.push(P('<b>תוכן עניינים</b>',0,{keep:1}));d.blocks.filter(x=>['heading','subheading'].includes(x.type)&&!x.hidden).forEach(x=>o.push(P(esc((x.type==='subheading'?'   ':'')+plain(x.html)),0,{sp:'<w:spacing w:after="40"/>'})))}
+else if(t==='divider')o.push(P('',0,{bdr:'<w:pBdr><w:bottom w:val="single" w:sz="6" w:space="1" w:color="999999"/></w:pBdr>'}));
+else if(t==='sourceslist'){o.push(P(`<b>${TY.sourceslist[1]}</b>`,0,{keep:1}));d.blocks.filter(x=>x.type==='source'&&!x.hidden).forEach((x,i)=>o.push(P(esc(`${i+1}. ${slT(x,b.showCat)}`),0,{sp:'<w:spacing w:after="40"/>'})))}}
+const fld='<w:r><w:rPr><w:rtl/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:rtl/></w:rPr><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r>';
+const ftr=st.pn||st.foot?`${XH}<w:ftr ${WNS}><w:p><w:pPr><w:bidi/><w:jc w:val="center"/></w:pPr>${st.foot?runs(esc(st.foot),0,SZ-4)+'<w:r><w:t xml:space="preserve">   </w:t></w:r>':''}${st.pn?fld:''}</w:p></w:ftr>`:'';
+const hdr=st.head?`${XH}<w:hdr ${WNS}>${P(esc(st.head),0,{jc:'center',sz:SZ-4,col:'777777'})}</w:hdr>`:'';
+const doc=`${XH}<w:document ${WNS}><w:body>${o.join('')}<w:sectPr>${hdr?'<w:headerReference w:type="default" r:id="rIdH"/>':''}${ftr?'<w:footerReference w:type="default" r:id="rIdF"/>':''}<w:pgSz w:w="${PW}" w:h="${PH}"${st.land?' w:orient="landscape"':''}/><w:pgMar w:top="${M}" w:right="${M}" w:bottom="${M}" w:left="${M}" w:header="708" w:footer="708" w:gutter="0"/>${+st.cols>=2?`<w:cols w:num="${+st.cols}" w:space="${Math.round((+st.cg||10)*56.7)}"${st.rule?' w:sep="1"':''}/>`:''}<w:bidi/></w:sectPr></w:body></w:document>`;
+const H1=Math.round(SZ*1.5),H2=Math.round(SZ*1.2);
+const sty=`${XH}<w:styles ${WNS}><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="${xa(F)}" w:hAnsi="${xa(F)}" w:eastAsia="${xa(F)}" w:cs="${xa(F)}"/><w:sz w:val="${SZ}"/><w:szCs w:val="${SZ}"/><w:lang w:val="he-IL" w:eastAsia="he-IL" w:bidi="he-IL"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:bidi/><w:spacing w:after="120" w:line="${LN}" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:qFormat/></w:style><w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:qFormat/><w:pPr><w:spacing w:after="240"/><w:jc w:val="center"/></w:pPr><w:rPr><w:b/><w:bCs/><w:color w:val="${AC}"/><w:sz w:val="${SZ*2}"/><w:szCs w:val="${SZ*2}"/></w:rPr></w:style><w:style w:type="paragraph" w:styleId="Heading1"><w:name w:val="heading 1"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:qFormat/><w:pPr><w:keepNext/><w:spacing w:before="280" w:after="140"/><w:jc w:val="center"/><w:outlineLvl w:val="0"/></w:pPr><w:rPr><w:b/><w:bCs/><w:color w:val="${AC}"/><w:sz w:val="${H1}"/><w:szCs w:val="${H1}"/></w:rPr></w:style><w:style w:type="paragraph" w:styleId="Heading2"><w:name w:val="heading 2"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:qFormat/><w:pPr><w:keepNext/><w:spacing w:before="200" w:after="100"/><w:outlineLvl w:val="1"/></w:pPr><w:rPr><w:b/><w:bCs/><w:color w:val="${AC}"/><w:sz w:val="${H2}"/><w:szCs w:val="${H2}"/></w:rPr></w:style></w:styles>`;
+const R2='http://schemas.openxmlformats.org/officeDocument/2006/relationships/';
+const drel=`${XH}<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rIdSt" Type="${R2}styles" Target="styles.xml"/><Relationship Id="rIdSe" Type="${R2}settings" Target="settings.xml"/>${hdr?`<Relationship Id="rIdH" Type="${R2}header" Target="header1.xml"/>`:''}${ftr?`<Relationship Id="rIdF" Type="${R2}footer" Target="footer1.xml"/>`:''}${rels.join('')}</Relationships>`;
+const W2='application/vnd.openxmlformats-officedocument.wordprocessingml.';
+const ct=`${XH}<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Default Extension="png" ContentType="image/png"/><Default Extension="jpg" ContentType="image/jpeg"/><Default Extension="gif" ContentType="image/gif"/><Override PartName="/word/document.xml" ContentType="${W2}document.main+xml"/><Override PartName="/word/styles.xml" ContentType="${W2}styles+xml"/><Override PartName="/word/settings.xml" ContentType="${W2}settings+xml"/>${hdr?`<Override PartName="/word/header1.xml" ContentType="${W2}header+xml"/>`:''}${ftr?`<Override PartName="/word/footer1.xml" ContentType="${W2}footer+xml"/>`:''}<Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/></Types>`;
+const files=[['[Content_Types].xml',ct],['_rels/.rels',`${XH}<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="${R2}officeDocument" Target="word/document.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/></Relationships>`],
+['docProps/core.xml',`${XH}<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><dc:title>${xe(d.title)}</dc:title><dc:creator>בונה דפי מקורות</dc:creator><dc:language>he-IL</dc:language><dcterms:created xsi:type="dcterms:W3CDTF">${new Date().toISOString().replace(/\.\d+Z$/,'Z')}</dcterms:created></cp:coreProperties>`],
+['word/document.xml',doc],['word/styles.xml',sty],['word/settings.xml',`${XH}<w:settings ${WNS}><w:defaultTabStop w:val="720"/></w:settings>`],['word/_rels/document.xml.rels',drel]];
+if(hdr)files.push(['word/header1.xml',hdr]);if(ftr)files.push(['word/footer1.xml',ftr]);files.push(...imgs);
+const a=document.createElement('a');a.href=URL.createObjectURL(zip(files));a.download=nm+'.docx';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
 async function inflate(u){return new Uint8Array(await new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer())}
 async function docxBlocks(f){const u=new Uint8Array(await f.arrayBuffer()),v=new DataView(u.buffer);let e=u.length-22;while(e>=0&&v.getUint32(e,true)!==0x06054b50)e--;if(e<0)throw 0;
 let p=v.getUint32(e+16,true),xml=null;const n=v.getUint16(e+10,true);
@@ -538,7 +619,7 @@ loc();res=null;if(schema)st(`<b>${esc(n.heTitle||title)}</b><br><small>בחרו 
 /* ---------- compare / related / find-refs ---------- */
 async function netOk(){if(S.ui.net)return true;if(!await confirmD('הפעולה מתחברת לאתר ספריא (sefaria.org). יישלחו אליו רק מראי מקום. להפעיל את החיבור?','הפעלה'))return false;S.ui.net=true;save();return true}
 async function sefFetch(ref){const r=await sget(`v3/texts/${encodeURIComponent(ref)}?version=hebrew&return_format=text_only`,`sef.txt.${ref}|he`),d=r.d;if(d.error||!d.versions||!d.versions.length)throw 0;return d}
-function addSefSrc(d,cat){const v=d.versions.find(x=>x.language==='he')||d.versions[0],b=mkB('source');b.stype=cat&&cn().includes(cat)?cat:cn()[0];b.ref=d.heRef||d.ref;b.sref=d.ref;b.html=sfl(v.text);b.note=`<i>${esc('ספריא · '+(v.versionTitle||''))}</i>`;cleanB(b);return b}
+function addSefSrc(d,cat){const v=d.versions.find(x=>x.language==='he')||d.versions[0],b=mkB('source');cat=cat||(d.categories||[]).map(z=>CATMAP[z]).find(Boolean);b.stype=cat&&cn().includes(cat)?cat:cn()[0];b.ref=d.heRef||d.ref;b.sref=d.ref;b.html=sfl(v.text);b.note=`<i>${esc('ספריא · '+(v.versionTitle||''))}</i>`;cleanB(b);return b}
 function insBlocks(bs,afterId){mut(()=>{const d=D(),j=d.blocks.findIndex(z=>z.id===(afterId||S.sel));d.blocks.splice(j<0?d.blocks.length:j+1,0,...bs);S.sel=bs[bs.length-1].id})}
 function cmpDlg(){const L=D().blocks.filter(b=>b.type==='source');if(L.length<2)return toast('צריך לפחות שני מקורות בדף');
 dlg(`<h2>⚖️ השוואת מקורות</h2><p>בחרו שני מקורות להצגה זה לצד זה:</p>${L.map(b=>`<label class="dr"><span><input type="checkbox" value="${b.id}"> ${esc(b.stype)} ${esc(b.ref)}<small>${esc(plain(b.html).slice(0,60))}</small></span></label>`).join('')}<div class="row"><button class="b" data-x="0">ביטול</button><button class="b pr" data-x="1">יצירת השוואה</button></div>`,(o,c)=>o.addEventListener('click',e=>{const x=X(e);if(x==='0'){c(null);return}if(x!=='1')return;
@@ -555,35 +636,143 @@ $('#rl',o).innerHTML=Object.keys(g).map(k=>`<details open><summary><b>${esc(CATM
 draw();o.addEventListener('input',draw);
 o.addEventListener('click',async e=>{const x=X(e);if(x==='close'){c(null);return}if(!/^a\d+$/.test(x))return;const l=links[+x.slice(1)];
 try{insBlocks([addSefSrc(await sefFetch(lr(l)),CATMAP[l.category])],id);toast('המקור נוסף לדף')}catch(_){toast('לא ניתן להביא את המקור')}})})}
-function findDlg(){dlg(`<h2>🤖 זיהוי מקורות מתוך טקסט</h2><textarea class="in" id="ft" rows="6" style="width:100%" placeholder="הדביקו כאן שיעור או קטע טקסט…" aria-label="טקסט לזיהוי"></textarea><div class="row"><button class="b pr" data-x="find">זהה מקורות</button><button class="b" data-x="close">סגירה</button></div><div id="fres"></div>`,(o,c)=>{let found=[];
-o.addEventListener('click',async e=>{const x=X(e);if(x==='close'){c(null);return}
-if(x==='find'){const t=$('#ft',o).value.trim();if(!t)return;if(!await confirmD('הטקסט שהדבקתם יישלח לאתר ספריא לצורך הזיהוי. להמשיך?','שליחה'))return;$('#fres',o).textContent='מזהה…';
-try{const r=await fetch(SEF+'find-refs',{method:'POST',headers:{'Content-Type':'application/json',accept:'application/json'},body:JSON.stringify({text:{title:'',body:t},lang:'he'})});if(!r.ok)throw 0;const d=await r.json(),rs=(d.body&&d.body.results)||d.results||[],seen=new Set();found=[];
-rs.forEach(z=>(z.refs||(z.ref?[z.ref]:[])).forEach(f=>{if(!seen.has(f)){seen.add(f);found.push({ref:f,txt:z.text||''})}}));
-$('#fres',o).innerHTML=found.map((f,i)=>`<div class="dr"><div><b dir="ltr">${esc(f.ref)}</b><small>${esc(f.txt)}</small></div><button class="b sm" data-x="a${i}">הוסף את המקור</button></div>`).join('')||'לא זוהו מקורות.'}
-catch(_){$('#fres',o).textContent='⚠ הזיהוי נכשל (אין חיבור, או שהדפדפן חסם את הבקשה).'}return}
-if(/^a\d+$/.test(x)){const f=found[+x.slice(1)];try{insBlocks([addSefSrc(await sefFetch(f.ref))]);toast('המקור נוסף')}catch(_){toast('לא ניתן להביא את המקור')}}})})}
+function cands(t){const o=new Set(),add=x=>{x=x.replace(/[\u0591-\u05C7]/g,'').replace(/[“”„״]/g,'"').replace(/[’‘`׳]/g,"'").trim().replace(/^[\s,.;:–-]+|[\s,.;:–-]+$/g,'');if(x.length>2&&x.length<70&&/[א-ת]/.test(x))o.add(x)};
+t.replace(/[(\[]([^()\[\]\n]{3,70})[)\]]/g,(_,x)=>{if(/[א-ת]{2}/.test(x)&&/(^|\s)[א-ת]{1,3}["'׳״]?[א-ת]?(?=\s|,|:|\.|$)|\d/.test(x))add(x)});
+const RE=/([א-ת"'׳״]{2,}(?:\s[א-ת"'׳״]{2,}){0,2})\s+(?:דף\s+|פרק\s+|סימן\s+|פסוק\s+)?[א-ת]{1,3}["'׳״]?[א-ת]?(?:\s*ע["'׳״]?[אב](?![א-ת])|\s*[,:.]\s*[א-ת]{1,3}["'׳״]?[א-ת]?(?![א-ת]))/g;let m;while((m=RE.exec(t)))add(m[0]);return[...o]}
+async function findDlg(){if(!await netOk())return;
+dlg(`<h2>🤖 זיהוי מקורות מתוך טקסט</h2><p><small>הדביקו שיעור או קטע – המערכת מזהה מראי מקום (גם בסוגריים, כמו ‏(ברכות ב ע"א)‏ או בראשית א, א), מאמתת מול ספריא, ומאפשרת לבחור אילו להוסיף. נשלחים לספריא הטקסט ומראי המקום בלבד.</small></p><textarea class="in" id="ft" rows="7" style="width:100%" placeholder="הדביקו כאן…" aria-label="טקסט לזיהוי"></textarea><div class="row"><button class="b pr" data-x="find">זהה מקורות</button><button class="b" data-x="all">סמן/בטל הכול</button><button class="b" data-x="add">הוסף נבחרים לדף</button><button class="b" data-x="close">סגירה</button></div><div id="fp" role="status"></div><div id="fres"></div>`,(o,c)=>{
+let found=[];const P=m=>{$('#fp',o).textContent=m},draw=()=>{$('#fres',o).innerHTML=found.map((f,i)=>`<label class="dr"><span><input type="checkbox" data-i="${i}"${f.on?' checked':''}> <b>${esc(f.he||f.ref)}</b> <small dir="ltr">${esc(f.ref)}</small></span></label>`).join('')||'לא זוהו מקורות. כדאי לכלול שם ספר ומיקום (למשל: ברכות ב ע"א, בראשית א, א).'};
+o.addEventListener('change',e=>{const i=e.target.dataset.i;if(i!=null&&found[+i])found[+i].on=e.target.checked});
+o.addEventListener('click',async e=>{const x=X(e);if(!x)return;if(x==='close'){c(null);return}
+if(x==='all'){const v=!found.every(f=>f.on);found.forEach(f=>f.on=v);draw();return}
+if(x==='add'){const sel=found.filter(f=>f.on);if(!sel.length)return toast('לא נבחרו מקורות');const bs=[];let bad=0;for(let i=0;i<sel.length;i++){P(`מביא טקסטים… ${i+1}/${sel.length}`);try{bs.push(addSefSrc(await sefFetch(sel[i].ref)))}catch(_){bad++}}P('');if(!bs.length)return toast('לא ניתן להביא את המקורות');insBlocks(bs);c(1);toast(`נוספו ${bs.length} מקורות`+(bad?` (${bad} נכשלו)`:''));return}
+if(x==='find'){const t=$('#ft',o).value.trim();if(!t)return;found=[];draw();const seen=new Set(),add=(ref,he)=>{if(ref&&!seen.has(ref)){seen.add(ref);found.push({ref,he,on:true})}};
+P('מזהה דרך ספריא…');
+for(let i=0;i<t.length;i+=6000){try{const r=await fetch(SEF+'find-refs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:{title:'',body:t.slice(i,i+6000)},lang:'he'})});if(!r.ok)continue;const d=await r.json(),B=d.body||d,rd=B.refData||{};(B.results||[]).forEach(z=>(z.refs||[]).forEach(f=>add(f,rd[f]&&rd[f].heRef)))}catch(_){}}
+const cs=cands(t).slice(0,40),q=cs.map((x,i)=>i),out=[];let k=0;
+await Promise.all([0,1,2,3].map(async()=>{while(q.length){const i=q.shift();P(`מאמת מראי מקום… ${++k}/${cs.length}`);try{const d=(await sget('name/'+encodeURIComponent(cs[i])+'?limit=1','sef.nm.'+cs[i])).d;if(d&&d.is_ref&&d.ref&&!d.is_book)out[i]=d.ref}catch(_){}}}));
+out.forEach((ref,i)=>ref&&add(ref,cs[i]));P(found.length?`זוהו ${found.length} מקורות`:'');draw()}})})}
+
+/* ---------- pagination ---------- */
+const pnText=(s,k,N)=>({w:`עמוד ${k+1}`,of:`${k+1} מתוך ${N}`,d:`– ${k+1} –`}[s.pnfmt]||String(k+1));
+function ovHtml(s,k,m,N){const pos=s.pnpos||'center',f=s.foot?esc(s.foot):'',n=s.pn?pnText(s,k,N):'',b=`bottom:${m/3}px`;
+return(s.head?`<div class="h" style="top:${m/3}px">${esc(s.head)}</div>`:'')+(pos==='center'||!n?`<div class="f" style="${b}">${f}${f&&n?' · ':''}${n}</div>`:`<div class="f" style="${b}">${f}</div><div class="f" style="${b};text-align:${pos};padding-inline:${m}px">${n}</div>`)+(s.wm?`<div class="w">${esc(s.wm)}</div>`:'')}
+function pageCss(s){const q=x=>JSON.stringify(String(x)),pn=s.pn?({w:'"עמוד " counter(page)',of:'counter(page) " מתוך " counter(pages)',d:'"– " counter(page) " –"'}[s.pnfmt]||'counter(page)'):'',pos=s.pnpos||'center',st='font:11px sans-serif;color:#555';let m='';
+if(s.head)m+=`@top-center{content:${q(s.head)};${st}}`;
+if(pos==='center'&&(s.pn||s.foot))m+=`@bottom-center{content:${[s.foot?q(s.foot+(s.pn?'  ·  ':'')):'',pn].filter(Boolean).join(' ')};${st}}`;
+else{if(s.pn)m+=`@bottom-${pos}{content:${pn};${st}}`;if(s.foot)m+=`@bottom-center{content:${q(s.foot)};${st}}`}
+return`@page{size:${s.paper||'A4'}${s.land?' landscape':''};margin:${mmOf(s)}mm;${m}}`}
+function paginateN(p,s){const N=Math.min(3,+s.cols||2),mm=96/25.4,m=mmOf(s)*mm,[pw,ph]=pdim(s).map(v=>v*mm),cg=(+s.cg||10)*mm,cw=(pw-2*m-(N-1)*cg)/N,Hc=ph-2*m-2;
+p.classList.remove('pg');p.classList.add('two');p.style.minHeight='';p.style.setProperty('--nc',N);p.style.setProperty('--cg',(+s.cg||10)+'mm');$$('.pf',p).forEach(x=>x.remove());
+const wrapped=!!p.querySelector('.sheet'),bl=[...p.querySelectorAll('.blk')];
+if(!wrapped){const mt=document.createElement('div');mt.className='mt';mt.style.width=cw+'px';p.append(mt);bl.forEach(e=>mt.append(e))}
+const mb=e=>parseFloat(getComputedStyle(e).marginBottom)||0,hh=e=>e.getBoundingClientRect().height+mb(e),tops=[...p.querySelectorAll('.ph,.ttl1')],topH=tops.reduce((a,e)=>a+hh(e),0),hs=bl.map(hh),a=[];let c=0,u=0;
+bl.forEach((e,i)=>{if(e.classList.contains('pbb')&&u>0){c=(Math.floor(c/N)+1)*N;u=0}
+const cap=Hc-(c<N?topH:0);let need=hs[i];if(/t-(heading|subheading)/.test(e.className)&&bl[i+1])need+=Math.min(hs[i+1],80);
+if(u>0&&u+need>cap){c++;u=0}a.push(c);u+=hs[i];if(e.classList.contains('t-pagebreak')){c=(Math.floor(c/N)+1)*N;u=0}});
+const nS=Math.max(1,Math.ceil((Math.max(0,...a)+1)/N)),sig=a.join()+'|'+bl.map(e=>e.dataset.id).join()+'|'+[N,cw,s.rule,s.head,s.foot,s.pn,s.pnfmt,s.pnpos,s.wm].join();
+if(!(wrapped&&p._sig===sig)){const ae=document.activeElement,sl=getSelection(),r0=sl.rangeCount?sl.getRangeAt(0):null,sc=r0&&r0.startContainer,so=r0?r0.startOffset:0,fr=document.createDocumentFragment();
+for(let k=0;k<nS;k++){const sh=document.createElement('div');sh.className='sheet';sh.dataset.rule=s.rule?1:0;sh.innerHTML=(k?'':'<div class="sht"></div>')+'<div class="cols">'+'<div class="col"></div>'.repeat(N)+'</div><div class="sov no-print">'+ovHtml(s,k,m,nS)+'</div>';fr.append(sh)}
+const sht=fr.querySelector('.sht');tops.forEach(e=>sht.append(e));const cs=[...fr.querySelectorAll('.col')];bl.forEach((e,i)=>cs[a[i]].append(e));
+$$('.sheet,.mt',p).forEach(x=>x.remove());p.append(fr);p._sig=sig;
+if(ae&&ae!==document.body&&p.contains(ae)){ae.focus({preventScroll:true});if(sc&&sc.isConnected){try{const r=document.createRange();r.setStart(sc,Math.min(so,sc.nodeType===3?sc.nodeValue.length:sc.childNodes.length));r.collapse(true);sl.removeAllRanges();sl.addRange(r)}catch(_){}}}}
+PG=nS;PGS=ph+16;const sh=$$('.sheet',p);
+$$('.toc-pg',p).forEach(el=>{const t=p.querySelector(`.blk[data-id="${el.dataset.for}"]`);el.textContent=t?sh.indexOf(t.closest('.sheet'))+1:''});
+$('#pgl').innerHTML=Array.from({length:Math.min(PG,60)},(_,i)=>`<button class="b sm" data-pgo="${i+1}">עמוד ${i+1}</button>`).join('');pgInfo()}
+function fitPages(n){commitTyped();if(!(n>=1))return toast('הזינו מספר עמודים');const s=D().settings,p=$('#page');let f=+s.fs,l=+s.lh;
+const t=()=>{p.style.setProperty('--fs',f);p.style.setProperty('--lh',l);paginate();return PG<=n};
+while(!t()&&f>7){f=Math.round((f-.5)*10)/10;if(f<=12&&l>1.15)l=Math.round((l-.05)*100)/100}
+const ok=PG<=n;mut(()=>{s.fs=f;s.lh=l});toast(ok?`המסמך הוכנס ל-${n} עמודים (גודל גופן ${f})`:'לא ניתן להקטין עוד – נסו להקטין שוליים או להסתיר בלוקים')}
+function pdfDlg(){const s=D().settings,L=(l,k,h)=>`<label class="fld">${l}<select class="in" data-s="${k}">${O(h)}</select></label>`;
+dlg(`<h2>ייצוא PDF מסודר</h2><div class="grid">${L('גודל נייר','paper',['A4','Letter','A5'])}${L('שוליים','margin',[['narrow','צרים'],['normal','רגילים'],['wide','רחבים']])}${L('עמודות','cols',[['1','אחת'],['2','שתיים'],['3','שלוש']])}<label class="fld">מצב<select class="in" data-u="mode">${O([['normal','רגיל'],['student','תלמיד – ללא תשובות'],['teacher','מורה']])}</select></label>${L('מספור עמודים','pnfmt',[['n','1'],['w','עמוד 1'],['of','1 מתוך N'],['d','– 1 –']])}${L('מיקום מספר','pnpos',[['center','מרכז'],['right','ימין'],['left','שמאל']])}</div>
+<label class="fld"><input type="checkbox" data-s="land"> לרוחב</label><label class="fld"><input type="checkbox" data-s="pn"> מספרי עמודים</label><label class="fld"><input type="checkbox" data-s="color"> צבעוני (ביטול = שחור-לבן)</label><label class="fld"><input type="checkbox" data-s="nosplit"> אל תפצל בלוקים בין עמודים</label><label class="fld"><input type="checkbox" data-s="h1new"> כל כותרת ראשית בעמוד חדש</label>
+<label class="fld">כותרת עליונה<input class="in" data-s="head"></label><label class="fld">כותרת תחתונה<input class="in" data-s="foot"></label><label class="fld">סימן מים<input class="in" data-s="wm"></label>
+<div class="row"><input class="in" type="number" min="1" value="1" data-fit style="max-width:70px" aria-label="מספר עמודים"><button class="b" data-h="fit">הכנס לעמודים (הקטנת גופן אוטומטית)</button></div>
+<p><small>בחלון שייפתח בחרו יעד "שמירה כ-PDF", כבו את "כותרות ותחתיות" של הדפדפן, והפעילו "גרפיקת רקע" אם יש צבעים. הכותרות, מספרי העמודים והשוליים נקבעים כאן.</small></p>
+<div class="row"><button class="b" data-x="0">סגירה</button><button class="b pr" data-x="1">פתח חלון שמירה כ-PDF</button></div>`,(o,c)=>{$$('[data-s]',o).forEach(el=>{const v=s[el.dataset.s];if(el.type==='checkbox')el.checked=!!v;else el.value=v??''});$('[data-u=mode]',o).value=S.ui.mode;
+o.addEventListener('click',e=>{const x=X(e);if(x==='0')c(null);if(x==='1'){c(1);setTimeout(doPrint,150)}})})}
+function setPx(v){restoreSel();document.execCommand('styleWithCSS',false,true);document.execCommand('fontSize',false,7);const l=$$('#page [style*="xxx-large"]');l.forEach(e=>{e.style.fontSize=v+'px'});l[0]&&l[0].closest('.ed,td,th')?.dispatchEvent(new Event('input',{bubbles:true}))}
+
+const PAPER={A4:[210,297],Letter:[215.9,279.4],A5:[148,210]};
+const pdim=s=>{const [w,h]=PAPER[s.paper]||PAPER.A4;return s.land?[h,w]:[w,h]};
+let pgT,PG=1,PGS=1139;
+function tocHtml(){return D().blocks.filter(b=>['heading','subheading'].includes(b.type)&&!b.hidden).map(b=>`<div class="toci${b.type==='subheading'?' sub':''}"><span>${esc(plain(b.html))||'—'}</span><i></i><b class="toc-pg" data-for="${b.id}"></b></div>`).join('')||'<small class="no-print">אין כותרות במסמך</small>'}
+const pTop=()=>{const sg=$('#stage');return $('#page').getBoundingClientRect().top-sg.getBoundingClientRect().top+sg.scrollTop};
+function curPage(){const sg=$('#stage');return Math.min(PG,Math.max(1,Math.floor((sg.scrollTop+sg.clientHeight/3-pTop())/PGS)+1))}
+function pgInfo(){const w=D().blocks.filter(b=>!b.hidden).map(btxt).join(' ').split(/\s+/).filter(Boolean).length;$('#pgc').textContent=`עמוד ${curPage()}/${PG} · ${w} מילים`}
+function goPage(d){const k=Math.min(PG,Math.max(1,curPage()+d));$('#stage').scrollTo({top:pTop()+(k-1)*PGS-8,behavior:'smooth'})}
+const edHtml=t=>{if(!t.querySelector('.pgsp'))return t.innerHTML;const c=t.cloneNode(true);c.querySelectorAll('.pgsp').forEach(x=>x.remove());return c.innerHTML};
+const SPL=/t-(source|text|quote|note|question|answer|summary|important|info|list)\b/;
+function lineStart(ed,limY){const W=document.createTreeWalker(ed,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentElement.closest('.pgsp')?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}),T=[];let L=0,n;while(n=W.nextNode()){if(n.nodeValue.length){T.push([n,L]);L+=n.nodeValue.length}}if(!L)return null;
+const rg=document.createRange(),rc=i=>{let a=0,b=T.length-1;while(a<b){const mid=(a+b+1)>>1;if(T[mid][1]<=i)a=mid;else b=mid-1}const nd=T[a][0],o=i-T[a][1];rg.setStart(nd,o);rg.setEnd(nd,Math.min(o+1,nd.nodeValue.length));const r=rg.getClientRects();return r.length?r[0]:null};
+const rr=i=>{for(let j=i;j<Math.min(L,i+30);j++){const r=rc(j);if(r&&r.height)return r}return null};
+let lo=0,hi=L-1;while(lo<hi){const mid=(lo+hi)>>1,r=rr(mid);if(r&&r.bottom>limY+.5)hi=mid;else lo=mid+1}
+const r0=rr(lo);if(!r0||r0.bottom<=limY)return null;
+let a=0,b=lo;while(a<b){const mid=(a+b)>>1,r=rr(mid);if(r&&r.top>=r0.top-2)b=mid;else a=mid+1}
+const rl=rr(a)||r0;let q=0;while(q<T.length-1&&T[q+1][1]<=a)q++;const er=ed.getBoundingClientRect();
+return{node:T[q][0],off:a-T[q][1],top:rl.top,h:rl.height,edTop:er.top,edBot:er.bottom}}
+function splitBlock(p,e,st,ph,m,g,first){const pr0=()=>p.getBoundingClientRect().top;let kk=Math.floor((e.getBoundingClientRect().top-pr0())/st),fst=first;
+for(let guard=0;guard<60;guard++){const pr=pr0(),eb=e.getBoundingClientRect(),top=eb.top-pr,bot=eb.bottom-pr,lim=kk*st+ph-m;if(bot<=lim+.5)return;
+const atTop=top<=kk*st+m+2,eds=[...e.querySelectorAll('.ed')];let ed=null;
+for(const x of eds){const r=x.getBoundingClientRect();if(r.top-pr<lim&&r.bottom-pr>lim){ed=x;break}}
+let ls=ed&&lineStart(ed,pr+lim),lh=0;
+if(ls){lh=parseFloat(getComputedStyle(ed).lineHeight)||ls.h*1.4;const nb=Math.round((ls.top-ls.edTop)/lh),na=Math.round((ls.edBot-ls.top)/lh);
+if(na<2&&nb>=3){const l2=lineStart(ed,ls.top-lh*.6);if(l2)ls=l2}else if(fst&&ed===eds[0]&&nb<2&&!atTop)ls=null}
+if(!ls){if(atTop||!fst)return;const need=(kk+1)*st+m-top,sp=document.createElement('div');sp.className='pgap no-print';sp.style.height=need+'px';e.before(sp);kk++;continue}
+const lineTop=ls.top-pr-Math.max(0,(lh-ls.h)/2),need=(kk+1)*st+m-lineTop,a=Math.max(0,kk*st+ph-lineTop);if(need<=0)return;
+const sp=document.createElement('div');sp.className='pgap pgsp no-print';sp.contentEditable='false';sp.style.cssText=`display:block;height:${need}px;margin-inline:calc(-.6em - 6px);user-select:none;background:linear-gradient(to bottom,var(--pg) ${a}px,var(--bg) ${a}px,var(--bg) ${a+g}px,var(--pg) ${a+g}px)`;
+const r=document.createRange();r.setStart(ls.node,ls.off);r.collapse(true);r.insertNode(sp);kk++;fst=false}}
+function paginate(){const p=$('#page');if(!p)return;$$('.pgap,.pgov',p).forEach(x=>x.remove());$$('.ed',p).forEach(x=>x.normalize());$$('.toc',p).forEach(t=>{t.innerHTML=tocHtml()});
+const s=D().settings;if(+s.cols>=2){paginateN(p,s);return}p.classList.remove('two');
+p.classList.add('pg');const m=parseFloat(getComputedStyle(p).paddingTop)||0,ph=pdim(s)[1]*96/25.4,g=16,st=ph+g;PGS=st;p.style.setProperty('--phpx',ph+'px');
+const bl=[...p.querySelectorAll(':scope>.blk')],mb=e=>parseFloat(getComputedStyle(e).marginBottom)||0;let force=false,lastB=0;
+bl.forEach((e,i)=>{if(!e.offsetHeight)return;const pb=e.classList.contains('t-pagebreak'),top=e.offsetTop,k=Math.floor(top/st),lim=k*st+ph-m;let need=0;
+if(!pb&&(force||e.classList.contains('pbb'))){force=false;if(top>k*st+m+2)need=(k+1)*st+m-top}
+else if(!pb){const own=e.offsetHeight+mb(e);
+if(SPL.test(e.className)&&!e.classList.contains('keep')){if(top+own>lim)splitBlock(p,e,st,ph,m,g,top>k*st+m+2)}
+else{let h=own;if(/t-(heading|subheading)/.test(e.className)&&bl[i+1])h+=Math.min(bl[i+1].offsetHeight,80);if(top+h>lim&&top>k*st+m+2)need=(k+1)*st+m-top}}
+if(need>0){const sp=document.createElement('div');sp.className='pgap no-print';sp.style.height=need+'px';e.before(sp)}
+if(pb)force=true;lastB=e.offsetTop+e.offsetHeight});
+PG=Math.max(1,Math.floor(Math.max(0,lastB+m-1)/st)+1);p.style.minHeight=(PG*st-g)+'px';
+for(let k=0;k<PG;k++){const o=document.createElement('div');o.className='pgov no-print';o.style.top=k*st+'px';o.style.height=ph+'px';o.innerHTML=ovHtml(s,k,m,PG);p.append(o)}
+$$('.toc-pg',p).forEach(el=>{const t=p.querySelector(`.blk[data-id="${el.dataset.for}"]`);el.textContent=t?Math.floor(t.offsetTop/st)+1:''});
+$('#pgl').innerHTML=Array.from({length:Math.min(PG,60)},(_,i)=>`<button class="b sm" data-pgo="${i+1}">עמוד ${i+1}</button>`).join('');pgInfo()}
+$('#pgl').addEventListener('click',e=>{const b=e.target.closest('[data-pgo]');if(b)$('#stage').scrollTo({top:pTop()+(+b.dataset.pgo-1)*PGS-8,behavior:'smooth'})});
+const rePg=()=>{clearTimeout(pgT);pgT=setTimeout(paginate,120)};
+window.addEventListener('resize',rePg);$('#page').addEventListener('load',rePg,true);$('#stage').addEventListener('scroll',()=>{if(PG)pgInfo()});if(document.fonts)document.fonts.ready.then(rePg);
 
 /* ---------- init ---------- */
+const FONTS=['Rubik','Assistant','Heebo','Alef','Frank Ruhl Libre','David Libre','Miriam Libre','Noto Serif Hebrew','Noto Sans Hebrew','Noto Rashi Hebrew','Secular One','Suez One','Varela Round','Bellefair','Amatic SC','Karantina','Arial','David','Times New Roman','Tahoma','Narkisim',['system-ui','גופן מערכת']];
 const O=a=>a.map(x=>Array.isArray(x)?`<option value="${x[0]}">${x[1]}</option>`:`<option>${x}</option>`).join('');
 $('#addg').innerHTML=Object.keys(TY).map(t=>`<button class="b" data-add="${t}">${TY[t][0]} ${TY[t][1]}</button>`).join('');
 $('#set').innerHTML=`<h3>עיצוב הדף</h3>
-<label class="fld">גופן<select class="in" data-s="font">${O(['Rubik','Assistant','Arial','David',['system-ui','גופן מערכת']])}</select></label>
-<label class="fld">גודל<select class="in" data-s="fs">${O([12,14,16,18,20,22,24,28,32])}</select></label>
-<label class="fld">רווח שורות<select class="in" data-s="lh">${O([1,1.15,1.3,1.5,1.75,2])}</select></label>
+<label class="fld">גופן הטקסט<select class="in" data-s="font">${O(FONTS)}</select></label><label class="fld">גופן כותרות<select class="in" data-s="hfont">${O([['','כמו הטקסט'],...FONTS])}</select></label><label class="fld">גופן מקורות<select class="in" data-s="sfont">${O([['','כמו הטקסט'],...FONTS])}</select></label>
+<label class="fld">גודל גופן (px – כל ערך)<input class="in" type="number" min="6" max="96" step="0.5" list="fsl" data-s="fs"></label><label class="fld">גודל כותרות (מכפלה)<input class="in" type="number" min="0.5" max="3" step="0.05" data-s="hs"></label>
+<label class="fld">רווח שורות<input class="in" type="number" min="0.8" max="3" step="0.05" data-s="lh"></label><label class="fld">רווח בין בלוקים (em)<input class="in" type="number" min="0.1" max="3" step="0.1" data-s="bsp"></label><label class="fld"><input type="checkbox" data-s="just"> יישור דו-צדדי</label>
 <label class="fld">שוליים<select class="in" data-s="margin">${O([['narrow','צרים'],['normal','רגילים'],['wide','רחבים'],['custom','מותאם אישית']])}</select></label>
 <label class="fld">שוליים מותאמים (מ"מ)<input class="in" type="number" min="5" max="50" data-s="mm"></label>
 <label class="fld">סגנון<select class="in" data-s="style">${O([['classic','קלאסי'],['torah','תורני'],['modern','מודרני'],['study','לימודי']])}</select></label>
-<label class="fld">עמודות<select class="in" data-s="cols">${O([['1','עמודה אחת'],['2','שתי עמודות']])}</select></label><label class="fld">צבע הדגשה<input type="color" data-s="ac" aria-label="צבע הדגשה"></label>
+<label class="fld">גודל נייר<select class="in" data-s="paper">${O(['A4','Letter','A5'])}</select></label><label class="fld"><input type="checkbox" data-s="land"> הדף לרוחב</label><label class="fld">עמודות<select class="in" data-s="cols">${O([['1','עמודה אחת'],['2','שתי עמודות'],['3','שלוש עמודות']])}</select></label><label class="fld">רווח בין עמודות (מ"מ)<input class="in" type="number" min="2" max="30" data-s="cg"></label><label class="fld"><input type="checkbox" data-s="rule"> קו בין העמודות</label><label class="fld">צבע הדגשה<input type="color" data-s="ac" aria-label="צבע הדגשה"></label>
 <label class="fld">מספור מקורות<select class="in" data-s="num">${O([['none','ללא מספור'],['1','1, 2, 3'],['א','א, ב, ג'],['א.','א., ב., ג.'],['מקור','מקור 1, מקור 2']])}</select></label>
 <label class="fld">כותרת עליונה<input class="in" data-s="head"></label>
 <label class="fld">כותרת תחתונה<input class="in" data-s="foot"></label>
 <label class="fld"><input type="checkbox" data-s="showTitle"> הצגת שם המסמך בראש הדף</label><label class="fld"><input type="checkbox" data-s="cat"> הצגת קטגוריית המקור בדף</label>
 <label class="fld"><input type="checkbox" data-s="pn"> מספרי עמודים בהדפסה</label>
 <label class="fld"><input type="checkbox" data-s="color"> הדפסה צבעונית</label>
+<h3>עיטורים</h3>
+<label class="fld">עיטור כותרות<select class="in" data-s="orn">${O([['','ללא'],['line','קו תחתון'],['double','קו כפול'],['box','מסגרת'],['band','פס צבעוני'],['star','כוכבים ✦'],['fleur','עיטור ❦']])}</select></label>
+<label class="fld">סגנון קו מפריד<select class="in" data-s="div">${O([['','רגיל'],['dots','נקודות'],['dash','מקווקו'],['double','כפול'],['star','כוכבים ✦'],['fleur','עיטור ❧']])}</select></label>
+<label class="fld">מראה בלוק מקור<select class="in" data-s="bst">${O([['','לפי הסגנון'],['box','מסגרת'],['round','מעוגל'],['shadow','צל'],['tint','רקע צבעוני'],['double','מסגרת כפולה'],['plain','פשוט']])}</select></label>
+<label class="fld">רקע הדף<select class="in" data-s="bg">${O([['','ברירת מחדל'],['#fbf6e9','קלף'],['#f2f4f7','אפור בהיר'],['#eaf3ff','תכלת'],['#fff1f1','ורוד'],['#eef8ec','ירוק בהיר'],['#fff9d6','צהוב']])}</select></label>
+<label class="fld">סימן מים<input class="in" data-s="wm" placeholder="למשל: טיוטה"></label>
+<h3>עימוד חכם</h3>
+<label class="fld"><input type="checkbox" data-s="nosplit"> אל תפצל בלוקים בין עמודים</label><label class="fld"><input type="checkbox" data-s="h1new"> כל כותרת ראשית בעמוד חדש</label>
+<label class="fld">פורמט מספור עמודים<select class="in" data-s="pnfmt">${O([['n','1'],['w','עמוד 1'],['of','1 מתוך N'],['d','– 1 –']])}</select></label><label class="fld">מיקום המספר<select class="in" data-s="pnpos">${O([['center','מרכז'],['right','ימין'],['left','שמאל']])}</select></label>
+<div class="row"><input class="in" type="number" min="1" value="1" data-fit style="max-width:64px" aria-label="מספר עמודים"><button class="b sm" data-h="fit" title="מקטין גופן ורווחים עד שהמסמך נכנס">הכנס לעמודים</button></div>
 <h3>תצוגה</h3>
 <label class="fld">מצב<select class="in" data-u="mode">${O([['normal','רגיל'],['student','תלמיד – ללא תשובות'],['teacher','מורה']])}</select></label>
 <label class="fld">סינון לפי תגית<select class="in" id="tagf" data-u="tag"></select></label>`;
+$('[data-cmdv=fontName]').innerHTML=O([['','גופן'],...FONTS]);$('#fpx').addEventListener('change',e=>{const v=+e.target.value;if(v>=6)setPx(v)});document.documentElement.classList.toggle('mbx',/Chrom/.test(navigator.userAgent));
 load();initHist();render();
 </script>
 </body>
